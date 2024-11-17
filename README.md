@@ -35,5 +35,5 @@ docker build -t blog-app .
 2. Para correr el container:
 
 ```shell
-docker run -p 3000:3000 3001:3001 blog-app
+docker run -p 3000:3000 -p 3001:3001 blog-app
 ```
