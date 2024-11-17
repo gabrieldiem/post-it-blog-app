@@ -1,0 +1,31 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.17 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.17">
+  <diagram name="Page-1" id="RKHVUW2N_d_PKmhu-u5R">
+    <mxGraphModel dx="840" dy="490" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="5x6kxyVGrB73tKSnYr17-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;startArrow=block;startFill=1;endArrow=block;endFill=1;" edge="1" parent="1" source="5x6kxyVGrB73tKSnYr17-1" target="5x6kxyVGrB73tKSnYr17-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5x6kxyVGrB73tKSnYr17-1" value="FRONTEND SERVER&lt;div&gt;ReactJS + Vite&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="100" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="5x6kxyVGrB73tKSnYr17-5" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="290" y="100" width="280" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="5x6kxyVGrB73tKSnYr17-3" value="BACKEND SERVER&lt;div&gt;NodeJS + SQLite3 (NPM) + MongoDB SaaS&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="5x6kxyVGrB73tKSnYr17-5">
+          <mxGeometry width="280" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="5x6kxyVGrB73tKSnYr17-4" value="SQLITE3 ENGINE (NPM)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="5x6kxyVGrB73tKSnYr17-5">
+          <mxGeometry x="59.23307692307692" y="60" width="161.53846153846152" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="5x6kxyVGrB73tKSnYr17-10" value="MongoDB SaaS" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="355" y="280" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="5x6kxyVGrB73tKSnYr17-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;startArrow=block;startFill=1;" edge="1" parent="1" source="5x6kxyVGrB73tKSnYr17-3" target="5x6kxyVGrB73tKSnYr17-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
