@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node --env-file=./.env index.js"
   },
   "author": "",
   "license": "ISC",
