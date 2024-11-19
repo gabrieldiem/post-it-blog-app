@@ -1,16 +1,17 @@
 {
   "name": "blog-backend",
   "version": "0.0.1",
-  "main": "server.js",
+  "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node --env-file=./.env index.js"
   },
-  "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
     "express": "^4.21.1",
     "pino": "^9.5.0",
-    "pino-pretty": "^13.0.0"
+    "pino-pretty": "^13.0.0",
+    "sqlite3": "^5.1.7"
   }
 }
