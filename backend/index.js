@@ -25,7 +25,7 @@ app.get("/", (req, res) => {
 app.get("/posts", async (req, res) => {
   logger.info("Requested: /posts");
   const posts = await getPosts(db);
-  console.log(posts);
+  //console.log(posts);
   res.send(posts);
 });
 
