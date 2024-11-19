@@ -34,6 +34,17 @@ function createDBConnection(dbExists) {
 
   const db = new sqlite3.Database(DB_FILEPATH, OPEN_READWRITE | OPEN_CREATE | OPEN_FULLMUTEX);
   db.runP = promisify(db.run);
+  db.allP = (sqlQuery) => {
+    return new Promise((resolve, reject) => {
+      db.all(sqlQuery, (err, rows) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(rows);
+        }
+      });
+    });
+  };
 
   return db;
 }

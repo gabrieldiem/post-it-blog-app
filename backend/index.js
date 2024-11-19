@@ -3,6 +3,7 @@ import logger from "./src/logger.js";
 import initDB from "./src/init.js";
 
 import { EXIT_SUCCESS, EXIT_FAILURE } from "./src/constants.js";
+import getPosts from "./src/db.js";
 const PORT = process.env.PORT;
 
 const db = await initDB();
@@ -16,6 +17,13 @@ const app = express();
 app.get("/", (req, res) => {
   logger.info("Requested: /");
   res.send("Hello World!");
+});
+
+app.get("/posts", async (req, res) => {
+  logger.info("Requested: /posts");
+  const posts = await getPosts(db);
+  console.log(posts);
+  res.send(posts);
 });
 
 const server = app.listen(PORT, () => {
