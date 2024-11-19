@@ -14,6 +14,7 @@ if (!db) {
 const app = express();
 
 app.get("/", (req, res) => {
+  logger.info("Requested: /");
   res.send("Hello World!");
 });
 
