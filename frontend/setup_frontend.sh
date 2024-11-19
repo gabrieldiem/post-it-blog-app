@@ -22,10 +22,17 @@ print_colored_message $YELLOW_BOLD "══ Setting up [FRONTEND] Blog App with D
 
 print_colored_message $YELLOW_BOLD "══ Installing NPM modules ══"
 
+DEV_DEPS_OPTION="--include=dev"
+
 if [[ "$BUILD_MODE" == "prod" ]]; then
   print_colored_message $YELLOW_BOLD "══ Production Build Mode. Omitting devDependencies ══"
-  npm --prefix "$SCRIPT_DIR_FRONTEND" --loglevel info --omit=dev install
+  DEV_DEPS_OPTION="--omit=dev"
 else
   print_colored_message $YELLOW_BOLD "══ Development Build Mode. Including devDependencies ══"
-  npm --prefix "$SCRIPT_DIR_FRONTEND" --loglevel info --include=dev install 
 fi
+
+print_colored_message $YELLOW_BOLD "══ Installing dependencies for UI ══"
+npm --prefix "$SCRIPT_DIR_FRONTEND"/ui --loglevel info "$DEV_DEPS_OPTION" install
+
+print_colored_message $YELLOW_BOLD "══ Installing dependencies for Server ══"
+npm --prefix "$SCRIPT_DIR_FRONTEND"/server --loglevel info "$DEV_DEPS_OPTION" install
