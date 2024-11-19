@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import logger from "./src/logger.js";
 import initDB from "./src/init.js";
 
@@ -13,6 +14,8 @@ if (!db) {
 }
 
 const app = express();
+
+app.use(cors());
 
 app.get("/", (req, res) => {
   logger.info("Requested: /");
