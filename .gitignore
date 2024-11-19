@@ -1,3 +1,5 @@
 *.bkp
 *.dtmp
 *.fuse*
+frontend/dist
+frontend/dist/*
