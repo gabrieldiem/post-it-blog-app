@@ -1,12 +1,14 @@
 const express = require("express");
-const app = express();
 
-const SERVER_PORT = process.env.PORT;
+const PORT = process.env.PORT;
+const logger = require("./src/logger.js");
+
+const app = express();
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.listen(SERVER_PORT, () => {
-  console.log(`Example app listening on port ${port}`);
+app.listen(PORT, () => {
+  logger.info(`Backend server running on port ${PORT}, http://localhost:${PORT}`);
 });
