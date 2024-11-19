@@ -1,10 +1,10 @@
 # Blog App con DB
 
-Blog webapp con uso de base de datos SQL y NoSQL para la materia Base de Datos TA044
+Blog webapp con uso de base de datos SQL y NoSQL para la materia Base de Datos TA044.
 
-## Cómo correrlo
+## Cómo ejecutarlo
 
-El frontend será accesible mediante el puerto 3000 vía: <a href="localhost:3000" target="_blank">localhost:3000</a>, mientras que el backend será accesible mediante el puerto 3001 vía: <a href="localhost:3001" target="_blank">localhost:3001</a>.
+El frontend será accesible mediante el puerto 3000 vía: <a href="http://localhost:3000" target="_blank">http://localhost:3000</a>, mientras que el backend será accesible mediante el puerto 3001 vía: <a href="http://localhost:3001" target="_blank">http://localhost:3001</a>.
 
 ### Nativamente local
 
@@ -37,3 +37,7 @@ docker build -t blog-app .
 ```shell
 docker run -p 3000:3000 -p 3001:3001 blog-app
 ```
+
+## Cómo hacer setup del repo
+
+
