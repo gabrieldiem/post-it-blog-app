@@ -1,19 +1,23 @@
-const express = require("express");
-const serveStatic = require("serve-static");
-const path = require("path");
-const logger = require("./src/logger.js");
+import express from "express";
+import serveStatic from "serve-static";
+import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+import logger from "./src/logger.js";
+import { ENTRY_POINT_HTML, TARGET_FOLDER_NAME } from "./src/constants.js";
 
 const app = express();
-
 const PORT = process.env.PORT;
-const TARGET_FOLDER_NAME = process.env.TARGET_FOLDER_NAME;
-const ENTRY_POINT_HTML = "index.html";
 
-const targetFolderDirPath = path.dirname(__dirname);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const targetFolderDirPath = dirname(__dirname);
+const staticFolderPath = path.join(targetFolderDirPath, TARGET_FOLDER_NAME);
 
-app.use(serveStatic(path.join(targetFolderDirPath, TARGET_FOLDER_NAME)));
+app.use(serveStatic(staticFolderPath));
 
 app.get("*", (req, res) => {
+  logger.info(`Requested: ${req.originalUrl}`);
   res.sendFile(path.join(targetFolderDirPath, TARGET_FOLDER_NAME, ENTRY_POINT_HTML));
 });
 

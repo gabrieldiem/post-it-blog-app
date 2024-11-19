@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node --env-file=./.env index.js"
   },
-  "author": "",
+  "type": "module",
   "license": "ISC",
   "description": "",
   "dependencies": {
