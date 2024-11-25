@@ -4,13 +4,14 @@ import { timeAgoFormatter } from "../services/globals.js";
 
 import "./PostPreview.css";
 const COLOR = "#282828";
+const YOU_STRING = "(Tú)";
 
 const PostPreview = ({ post, userState }) => {
   const timeCreated = timeAgoFormatter.format(new Date(post.creation_date));
   const timeEdited = timeAgoFormatter.format(new Date(post.last_change_date));
   const commentCount = post.comments.length;
 
-  const youString = userState.user ? "(You)" : "";
+  const youString = (userState.user != null && userState.user == post.username) ? YOU_STRING : "";
   const isEdited = post.creation_date != post.last_change_date ? ` , editado ${timeEdited}` : "";
 
   const paddingSides = "30px";

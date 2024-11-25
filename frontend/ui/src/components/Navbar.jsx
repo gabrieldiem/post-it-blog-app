@@ -169,7 +169,6 @@ function Navbar({ userState, children }) {
               navigate(page.link);
             }}
             sx={{ my: 2, color: VIOLET_PRIMARY_S, display: "block" }}
-            href={page.link}
           >
             {page.name}
           </Button>
