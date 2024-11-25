@@ -237,7 +237,7 @@ function Navbar({ userState, children }) {
 
   return (
     <>
-      <AppBar position="static" color="custom">
+      <AppBar position="sticky" color="custom">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             {NavbarLogoDesktop}

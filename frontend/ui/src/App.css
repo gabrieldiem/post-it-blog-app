@@ -3,6 +3,6 @@
 }
 
 body {
-  background-color: var(--deep-grey);
+  background-color: var(--deep-grey) !important;
   font-family: "Roboto", Arial, Helvetica, sans-serif;
 }

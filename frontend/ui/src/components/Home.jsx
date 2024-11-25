@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Box } from "@mui/material";
 import PostPreview from "./PostPreview";
 import getPosts from "../services/posts";
 import "./Home.css";
@@ -19,9 +20,11 @@ function Home({ userState }) {
 
   return (
     <>
-      {posts.map((post, i) => {
-        return <PostPreview key={i} post={post} userState={userState}/>;
-      })}
+      <Box className="home-container">
+        {posts.map((post, i) => {
+          return <PostPreview key={i} post={post} userState={userState} />;
+        })}
+      </Box>
     </>
   );
 }
