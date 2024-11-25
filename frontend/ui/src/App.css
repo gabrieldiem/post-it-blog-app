@@ -1,0 +1,8 @@
+:root {
+  --deep-grey: #121212;
+}
+
+body {
+  background-color: var(--deep-grey);
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+}

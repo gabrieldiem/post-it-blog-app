@@ -1,8 +1,9 @@
 import { Card, CardHeader, CardContent, Typography } from "@mui/material";
+import { timeAgoFormatter } from "../services/globals.js";
 
-const PostPreview = ({ post, timeAgo }) => {
-  const timeCreated = timeAgo.format(new Date(post.creation_date));
-  const timeEdited = timeAgo.format(new Date(post.last_change_date));
+const PostPreview = ({ post }) => {
+  const timeCreated = timeAgoFormatter.format(new Date(post.creation_date));
+  const timeEdited = timeAgoFormatter.format(new Date(post.last_change_date));
   const commentCount = post.comments.length;
 
   return (

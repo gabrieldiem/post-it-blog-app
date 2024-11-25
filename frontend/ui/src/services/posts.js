@@ -2,15 +2,29 @@ import axios from "axios";
 const BACKEND_SERVER_PORT = 3001;
 const backendUrl = `http://localhost:${BACKEND_SERVER_PORT}`;
 
+function parseCommentsFromPost(commentsFetched) {
+  const parsedComments = [];
 
-async function getPosts() {
-  console.log("Fetching all posts");
-  const allPostsUrl = `${backendUrl}/posts`;
-  const postsRes = await axios.get(allPostsUrl);
-  const postsFetched = postsRes.data;
+  for (const comment of commentsFetched) {
+    const newComment = {
+      id: comment.comment_id,
+      content: comment.comment_content,
+      creation_date: comment.comment_creation_date,
+      last_change_date: comment.comment_last_change_date,
+      user_id: comment.user_id,
+      username: comment.user_name,
+    };
+
+    parsedComments.push(newComment);
+  }
+
+  return parsedComments;
+}
+
+function parsePosts(postsFetched) {
   const parsedPosts = [];
 
-  for(const post of postsFetched){
+  for (const post of postsFetched) {
     const newPost = {
       id: post.post_id,
       title: post.post_title,
@@ -20,26 +34,22 @@ async function getPosts() {
       last_change_date: post.post_last_change_date,
       user_id: post.user_id,
       username: post.user_name,
-      comments: []
-    }
+      comments: [],
+    };
 
-    for(const comment of post.comments){
-      const newComment = {
-        id: comment.comment_id,
-        content: comment.comment_content,
-        creation_date: comment.comment_creation_date,
-        last_change_date: comment.comment_last_change_date,
-        user_id: comment.user_id,
-        username: comment.user_name
-      }
-
-      newPost.comments.push(newComment);
-    }
-
+    newPost.comments = parseCommentsFromPost(post.comments);
     parsedPosts.push(newPost);
   }
 
   return parsedPosts;
+}
+
+async function getPosts() {
+  console.log("Fetching all posts");
+  const allPostsUrl = `${backendUrl}/posts`;
+  const postsRes = await axios.get(allPostsUrl);
+  const postsFetched = postsRes.data;
+  return parsePosts(postsFetched);
 }
 
 export default getPosts;
