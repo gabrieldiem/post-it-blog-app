@@ -16,7 +16,7 @@ import { Icon } from "@mui/material";
 import { Link } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-import "./Navbar.css";
+import "./no_select.css";
 import logo from "../assets/logo.png";
 
 const VIOLET_PRIMARY = "#a757e4";
@@ -202,7 +202,7 @@ function Navbar({ userState, children }) {
     if (userState.user != null) {
       setAccountMenu(getAccountItems(settingsWithUser));
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userState, userState.user]);
 
   const accountSection = (

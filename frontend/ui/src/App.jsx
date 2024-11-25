@@ -8,6 +8,7 @@ import Login from "./components/Login.jsx";
 import PageNotFound404 from "./components/PageNotFound404.jsx";
 import violetTheme from "./services/theme.js";
 import { useState } from "react";
+import SignUp from "./components/SignUp.jsx";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -33,6 +34,15 @@ const App = () => {
       element: (
         <Navbar userState={userState}>
           <Login userState={userState} />
+        </Navbar>
+      ),
+      errorElement: _errorElement,
+    },
+    {
+      path: "/signup",
+      element: (
+        <Navbar userState={userState}>
+          <SignUp userState={userState} />
         </Navbar>
       ),
       errorElement: _errorElement,

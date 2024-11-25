@@ -6,3 +6,4 @@ TimeAgo.addDefaultLocale(TimeAgoEs);
 const timeAgoFormatter = new TimeAgo("es-AR");
 
 export { timeAgoFormatter };
+

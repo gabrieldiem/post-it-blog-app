@@ -25,4 +25,20 @@ async function getUserInfo(username) {
   return userRes.data;
 }
 
-export default getUserInfo;
+async function createNewUser(username) {
+  console.log("Creating new user");
+  const usernameEncoded = encodeURIComponent(username);
+  const getUserUrl = `${backendUrl}/user?username=${usernameEncoded}`;
+  const userRes = await axios.post(getUserUrl);
+
+  if(userRes.data && userRes.data[0]){
+    const userFetched = userRes.data[0];
+    console.log(userFetched);
+    return parseUserInfo(userFetched);
+  }
+
+  return userRes.data;
+}
+
+export {getUserInfo};
+export {createNewUser};

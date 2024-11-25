@@ -13,34 +13,35 @@ import { useState } from "react";
 import AlreadyLogedIn from "./AlreadyLogedIn";
 import "./no_select.css";
 
-import {getUserInfo} from "../services/user";
+import { getUserInfo } from "../services/user";
+import { createNewUser } from "../services/user";
 import { StatusCodes } from "http-status-codes";
 
 const VIOLET_PRIMARY = "#a757e4";
 const MAX_USERNAME = 30;
 const COLOR = "#282828";
 
-const Login = ({ userState }) => {
+const SignUp = ({ userState }) => {
   const navigate = useNavigate();
 
   const [usernameError, setUsernameError] = useState(false);
   const [usernameErrorMessage, setUsernameErrorMessage] = useState("");
 
-  const fetchUserInfo = async (username) => {
-    try{
-      const data = await getUserInfo(username);
-      if(data && data.name){
+  const addNewUser = async (username) => {
+    try {
+      const data = await createNewUser(username);
+      if (data && data.name) {
         userState.setUser(data);
-        console.log(userState)
+        console.log(userState);
         navigate("/");
       } else {
         setUsernameError(true);
         setUsernameErrorMessage("Error de conexión con el servidor.");
       }
-    } catch(error){
+    } catch (error) {
       setUsernameError(true);
-      if(error.response && error.response.status == StatusCodes.NOT_FOUND){
-        setUsernameErrorMessage("No se encontró el usuario.");
+      if (error.response && error.response.status == StatusCodes.CONFLICT) {
+        setUsernameErrorMessage("El usuario ya existe.");
         return;
       }
       setUsernameErrorMessage("Error de conexión con el servidor.");
@@ -56,7 +57,7 @@ const Login = ({ userState }) => {
 
     const data = new FormData(event.currentTarget);
     const username = data.get("username");
-    fetchUserInfo(username);
+    addNewUser(username);
   };
 
   const validateInputs = () => {
@@ -124,7 +125,7 @@ const Login = ({ userState }) => {
         }}
       >
         <Typography component="h1" variant="h4" sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)" }}>
-          Iniciar Sesión
+          ¡Únete a PostIt!
         </Typography>
         <Box
           component="form"
@@ -155,14 +156,21 @@ const Login = ({ userState }) => {
             />
           </FormControl>
           <Button type="submit" fullWidth variant="contained" onClick={validateInputs}>
-            Iniciar Sesión
+            Crear cuenta
           </Button>
         </Box>
         <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
           <Typography sx={{ textAlign: "center" }}>
-            ¿Todavía no tienes cuenta?{" "}
-            <Link onClick={() => navigate("/signup")} variant="body2" sx={{ alignSelf: "center" }} className="cursor-hand">
-              Registrarse
+            ¿Ya tienes una cuenta?{" "}
+            <Link
+              onClick={() => {
+                navigate("/login");
+              }}
+              variant="body2"
+              sx={{ alignSelf: "center" }}
+              className="cursor-hand"
+            >
+              Inicia sesión
             </Link>
           </Typography>
         </Box>
@@ -171,4 +179,4 @@ const Login = ({ userState }) => {
   );
 };
 
-export default Login;
+export default SignUp;
