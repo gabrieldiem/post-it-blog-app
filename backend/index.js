@@ -5,7 +5,9 @@ import logger from "./src/logger.js";
 import initDB from "./src/init.js";
 
 import { EXIT_SUCCESS, EXIT_FAILURE } from "./src/constants.js";
-import { getPosts, getUserInfo } from "./src/db.js";
+import { getPosts, getUserInfo, createNewUser } from "./src/db.js";
+import { StatusCodes } from "http-status-codes";
+
 const PORT = process.env.PORT;
 
 const db = await initDB();
@@ -31,30 +33,30 @@ function logErrorToConsole(error, genericErrorMessage) {
 
 app.get("/", (req, res) => {
   try {
-    logger.info("Requested: /");
+    logger.info("Requested: GET /");
     res.send("Hello World!");
   } catch (error) {
     const genericErrorMessage = "Failed requesting root path";
     logErrorToConsole(error, genericErrorMessage);
-    res.status(500).send(genericErrorMessage);
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(genericErrorMessage);
   }
 });
 
 app.get("/posts", async (req, res) => {
   try {
-    logger.info("Requested: /posts");
+    logger.info("Requested: GET /posts");
     const posts = await getPosts(db);
     res.send(posts);
   } catch (error) {
     const genericErrorMessage = "Failed requesting posts";
     logErrorToConsole(error, genericErrorMessage);
-    res.status(500).send(genericErrorMessage);
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(genericErrorMessage);
   }
 });
 
 app.get("/user", async (req, res) => {
   try {
-    logger.info("Requested: /user");
+    logger.info("Requested: GET /user");
 
     const parsedUrl = url.parse(req.url, true);
     const query = parsedUrl ? parsedUrl.query : null;
@@ -65,9 +67,9 @@ app.get("/user", async (req, res) => {
 
     const userInfo = await getUserInfo(query.username, db);
     console.log(userInfo);
-    
-    if(userInfo.length == 0){
-      res.status(404).send("User not found");
+
+    if (userInfo.length == 0) {
+      res.status(StatusCodes.NOT_FOUND).send("User not found");
       return;
     }
 
@@ -75,7 +77,40 @@ app.get("/user", async (req, res) => {
   } catch (error) {
     const genericErrorMessage = "Failed requesting user info";
     logErrorToConsole(error, genericErrorMessage);
-    res.status(500).send(genericErrorMessage);
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(genericErrorMessage);
+  }
+});
+
+app.post("/user", async (req, res) => {
+  try {
+    logger.info("Requested: POST /user");
+
+    const parsedUrl = url.parse(req.url, true);
+    const query = parsedUrl ? parsedUrl.query : null;
+
+    if (query == null) {
+      throw Error("No param present in query string");
+    }
+
+    const userInfo = await getUserInfo(query.username, db);
+
+    if (userInfo.length != 0) {
+      res.status(StatusCodes.CONFLICT).send("User already exists");
+      return;
+    }
+
+    await createNewUser(query.username, db);
+    const newUserInfo = await getUserInfo(query.username, db);
+    if (newUserInfo.length == 0) {
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).send("Error during using creation");
+      return;
+    }
+
+    res.send(newUserInfo);
+  } catch (error) {
+    const genericErrorMessage = "Failed creating new user";
+    logErrorToConsole(error, genericErrorMessage);
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(genericErrorMessage);
   }
 });
 

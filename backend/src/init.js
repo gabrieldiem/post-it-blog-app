@@ -6,7 +6,7 @@ import { dirname } from "path";
 import csvParser from "csvtojson";
 import logger from "./logger.js";
 import { DB_DIR_NAME, DB_PERSISTENCE_NAME, MAX_USERNAME, MAX_POST_TITLE } from "./constants.js";
-import { promiseHooks } from "v8";
+
 const fsPromises = fs.promises;
 const { OPEN_READWRITE, OPEN_CREATE, OPEN_FULLMUTEX } = sqlite3_;
 const sqlite3 = sqlite3_.verbose();

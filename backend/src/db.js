@@ -1,3 +1,4 @@
+import { promisify } from "util";
 import { MAX_USERNAME } from "./constants.js";
 
 async function getPosts(db) {
@@ -59,5 +60,28 @@ async function getUserInfo(username, db) {
   return userInfo;
 }
 
+async function createNewUser(username, db) {
+  if (username == null || username.length == 0 || username.length > MAX_USERNAME) {
+    throw Error("Invalid username");
+  }
+
+  const currentTimeEpochMs = Date.now();
+
+  await db.runP("BEGIN TRANSACTION");
+
+  const statement = db.prepare(`
+    INSERT INTO user (name, creation_date, last_change_date) 
+    VALUES (?, ?, ?)
+  `);
+
+  statement.runP = promisify(statement.run);
+  statement.finalizeP = promisify(statement.finalize);
+
+  await statement.runP(username, currentTimeEpochMs, currentTimeEpochMs);
+  await statement.finalizeP();
+  await db.runP("END TRANSACTION");
+}
+
 export { getPosts };
 export { getUserInfo };
+export { createNewUser };
