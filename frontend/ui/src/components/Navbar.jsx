@@ -202,6 +202,7 @@ function Navbar({ userState, children }) {
     if (userState.user != null) {
       setAccountMenu(getAccountItems(settingsWithUser));
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userState, userState.user]);
 
   const accountSection = (
