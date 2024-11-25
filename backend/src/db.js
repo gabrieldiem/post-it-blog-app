@@ -1,3 +1,5 @@
+import { MAX_USERNAME } from "./constants.js";
+
 async function getPosts(db) {
   const posts = await db.allP(`
     SELECT 
@@ -15,7 +17,7 @@ async function getPosts(db) {
       user ON post.user_id = user.id
   `);
 
-  for(const post of posts){
+  for (const post of posts) {
     const postId = post.post_id;
     const comments = await db.allP(`
       SELECT 
@@ -38,4 +40,24 @@ async function getPosts(db) {
   return posts;
 }
 
-export default getPosts;
+async function getUserInfo(username, db) {
+  if (username == null || username.length == 0 || username.length > MAX_USERNAME) {
+    throw Error("Invalid username");
+  }
+
+  const userInfo = await db.allP(`
+    SELECT 
+      user.id AS user_id,
+      user.name AS user_name,
+      user.creation_date AS user_creation_date
+    FROM 
+      user
+    WHERE
+      user.name = "${username}";
+  `);
+
+  return userInfo;
+}
+
+export { getPosts };
+export { getUserInfo };

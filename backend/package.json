@@ -4,6 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "dev": "nodemon --env-file=./.env index.js",
     "start": "node --env-file=./.env index.js"
   },
   "license": "ISC",
@@ -15,5 +16,8 @@
     "pino": "^9.5.0",
     "pino-pretty": "^13.0.0",
     "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
   }
 }
