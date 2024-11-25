@@ -3,9 +3,9 @@ import PostPreview from "./PostPreview";
 import getPosts from "../services/posts";
 import "./Home.css";
 
-function Home() {
+function Home({ userState }) {
   const [posts, setPosts] = useState([]);
-
+  console.log(userState);
   useEffect(() => {
     async function fetchPosts() {
       setPosts(await getPosts());
@@ -20,7 +20,7 @@ function Home() {
   return (
     <>
       {posts.map((post, i) => {
-        return <PostPreview key={i} post={post}/>;
+        return <PostPreview key={i} post={post} userState={userState}/>;
       })}
     </>
   );
