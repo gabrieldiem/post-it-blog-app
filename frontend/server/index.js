@@ -1,7 +1,7 @@
 import express from "express";
 import serveStatic from "serve-static";
 import path from "path";
-import { fileURLToPath } from "url";
+import url, { fileURLToPath } from "url";
 import { dirname } from "path";
 import logger from "./src/logger.js";
 import { ENTRY_POINT_HTML, TARGET_FOLDER_NAME } from "./src/constants.js";
