@@ -1,6 +1,6 @@
-# Blog App con DB
+# PostIt
 
-Blog webapp con uso de base de datos SQL y NoSQL para la materia Base de Datos TA044.
+Una sencilla webapp para hacer blogs, con uso de base de datos SQL para almacenar los posts, comentarios y usarios, y una base NoSQL para manejar los attachments, para la materia Base de Datos TA044.
 
 ## Cómo ejecutarlo
 
