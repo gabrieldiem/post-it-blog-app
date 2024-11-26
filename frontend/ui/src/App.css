@@ -5,4 +5,5 @@
 body {
   background-color: var(--deep-grey) !important;
   font-family: "Roboto", Arial, Helvetica, sans-serif;
+  color: white !important;
 }

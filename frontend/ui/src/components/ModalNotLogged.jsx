@@ -1,6 +1,7 @@
 import { Modal, Box, Typography, Button, Divider } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { CLIENT_URLS } from "../services/globals";
 
 const COLOR = "#282828";
 const VIOLET_PRIMARY = "#a757e4";
@@ -13,7 +14,7 @@ const ModalNotLogged = () => {
 
   const handleClose = () => {
     setOpen(false);
-    navigate("/");
+    navigate(CLIENT_URLS.HOME);
   };
 
   return (
@@ -45,7 +46,7 @@ const ModalNotLogged = () => {
           <Divider />
           <br />
 
-          <Button fullWidth variant="contained" onClick={() => navigate("/login")}>
+          <Button fullWidth variant="contained" onClick={() => navigate(CLIENT_URLS.LOGIN)}>
             Iniciar Sesión
           </Button>
         </Box>

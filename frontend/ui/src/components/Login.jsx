@@ -2,12 +2,13 @@ import { Button, Box, FormLabel, FormControl, Link, TextField, Typography, Stack
 import MuiCard from "@mui/material/Card";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { StatusCodes } from "http-status-codes";
 
 import AlreadyLogedIn from "./AlreadyLogedIn";
 import "./no_select.css";
 
 import { getUserInfo } from "../services/user";
-import { StatusCodes } from "http-status-codes";
+import { CLIENT_URLS } from "../services/globals";
 
 const VIOLET_PRIMARY = "#a757e4";
 const MAX_USERNAME = 30;
@@ -25,7 +26,7 @@ const Login = ({ userState }) => {
       if (data && data.name) {
         userState.setUser(data);
         console.log(userState);
-        navigate("/");
+        navigate(CLIENT_URLS.HOME);
       } else {
         setUsernameError(true);
         setUsernameErrorMessage("Error de conexión con el servidor.");
@@ -154,7 +155,7 @@ const Login = ({ userState }) => {
         <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
           <Typography sx={{ textAlign: "center" }}>
             ¿Todavía no tienes cuenta?{" "}
-            <Link onClick={() => navigate("/signup")} variant="body2" sx={{ alignSelf: "center" }} className="cursor-hand">
+            <Link onClick={() => navigate(CLIENT_URLS.SIGNUP)} variant="body2" sx={{ alignSelf: "center" }} className="cursor-hand">
               Registrarse
             </Link>
           </Typography>

@@ -5,19 +5,20 @@ import MenuIcon from "@mui/material/MenuItem";
 import { useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 
+import { CLIENT_URLS } from "../services/globals";
 import "./no_select.css";
 import logo from "../assets/logo.png";
 
 const VIOLET_PRIMARY = "#a757e4";
 const VIOLET_PRIMARY_S = "#cfabeb";
 
-const pages = [{ name: "Inicio", link: "/" }];
+const pages = [{ name: "Inicio", link: CLIENT_URLS.HOME }];
 
-const settingsWithoutUser = [{ name: "Iniciar sesión", link: "/login" }];
+const settingsWithoutUser = [{ name: "Iniciar sesión", link: CLIENT_URLS.LOGIN }];
 
 const settingsWithUser = [
-  { name: "Cuenta", link: "/account" },
-  { name: "Cerrar sesión", link: "/logout" },
+  { name: "Cuenta", link: CLIENT_URLS.ACCOUNT },
+  { name: "Cerrar sesión", link: CLIENT_URLS.HOME },
 ];
 
 function Navbar({ userState, children }) {
@@ -51,7 +52,7 @@ function Navbar({ userState, children }) {
           flexWrap: "nowrap",
           cursor: "pointer",
         }}
-        onClick={() => navigate("/")}
+        onClick={() => navigate(CLIENT_URLS.HOME)}
       >
         <Icon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
           <img src={logo} height={25} width={25} />
@@ -60,7 +61,7 @@ function Navbar({ userState, children }) {
           variant="h5"
           noWrap
           component="a"
-          onClick={() => navigate("/")}
+          onClick={() => navigate(CLIENT_URLS.HOME)}
           sx={{
             mr: 2,
             display: { xs: "none", md: "flex" },
@@ -79,14 +80,14 @@ function Navbar({ userState, children }) {
 
   const NavbarLogoMobile = (
     <>
-      <Icon onClick={() => navigate("/")} sx={{ display: { xs: "flex", md: "none" }, mr: 1, userSelect: "none", cursor: "pointer" }}>
+      <Icon onClick={() => navigate(CLIENT_URLS.HOME)} sx={{ display: { xs: "flex", md: "none" }, mr: 1, userSelect: "none", cursor: "pointer" }}>
         <img src={logo} height={25} width={25} />
       </Icon>
       <Typography
         variant="h5"
         noWrap
         component="a"
-        onClick={() => navigate("/")}
+        onClick={() => navigate(CLIENT_URLS.HOME)}
         sx={{
           mr: 2,
           display: { xs: "flex", md: "none" },

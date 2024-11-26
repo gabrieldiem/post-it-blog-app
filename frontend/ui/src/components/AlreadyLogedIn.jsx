@@ -2,6 +2,8 @@ import { Button, Typography, Stack } from "@mui/material";
 import MuiCard from "@mui/material/Card";
 import { useNavigate } from "react-router-dom";
 
+import { CLIENT_URLS } from "../services/globals";
+
 const COLOR = "#282828";
 
 const AlreadyLogedIn = ({ userState }) => {
@@ -9,7 +11,7 @@ const AlreadyLogedIn = ({ userState }) => {
   const navigate = useNavigate();
 
   const backToHome = () => {
-    navigate("/");
+    navigate(CLIENT_URLS.HOME);
   };
 
   return (

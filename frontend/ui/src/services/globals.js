@@ -5,5 +5,11 @@ TimeAgo.addDefaultLocale(TimeAgoEs);
 
 const timeAgoFormatter = new TimeAgo("es-AR");
 
-export { timeAgoFormatter };
+const CLIENT_URLS = {
+  HOME: "/",
+  SIGNUP: "/signup",
+  LOGIN: "/login",
+  ACCOUNT: "/account",
+};
 
+export { timeAgoFormatter, CLIENT_URLS };

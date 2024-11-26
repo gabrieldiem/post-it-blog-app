@@ -2,11 +2,12 @@ import { Button, Box, FormLabel, FormControl, Link, TextField, Typography, Stack
 import MuiCard from "@mui/material/Card";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import AlreadyLogedIn from "./AlreadyLogedIn";
-
-import "./no_select.css";
 import { StatusCodes } from "http-status-codes";
+
+import AlreadyLogedIn from "./AlreadyLogedIn";
+import "./no_select.css";
 import { createNewUser } from "../services/user";
+import { CLIENT_URLS } from "../services/globals";
 
 const VIOLET_PRIMARY = "#a757e4";
 const MAX_USERNAME = 30;
@@ -23,7 +24,7 @@ const SignUp = ({ userState }) => {
       const data = await createNewUser(username);
       if (data && data.name) {
         userState.setUser(data);
-        navigate("/");
+        navigate(CLIENT_URLS.HOME);
       } else {
         setUsernameError(true);
         setUsernameErrorMessage("Error de conexión con el servidor.");
@@ -154,7 +155,7 @@ const SignUp = ({ userState }) => {
             ¿Ya tienes una cuenta?{" "}
             <Link
               onClick={() => {
-                navigate("/login");
+                navigate(CLIENT_URLS.LOGIN);
               }}
               variant="body2"
               sx={{ alignSelf: "center" }}

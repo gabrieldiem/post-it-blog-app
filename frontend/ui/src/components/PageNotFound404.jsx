@@ -1,11 +1,12 @@
 import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { CLIENT_URLS } from "../services/globals";
 
 const PageNotFound404 = () => {
   const navigate = useNavigate();
 
   const backHome = () => {
-    navigate("/");
+    navigate(CLIENT_URLS.HOME);
   };
 
   return (
