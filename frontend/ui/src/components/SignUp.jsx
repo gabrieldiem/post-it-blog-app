@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { StatusCodes } from "http-status-codes";
 
-import AlreadyLogedIn from "./AlreadyLogedIn";
+import ModalAlreadyLogedIn from "./ModalAlreadyLogedIn";
 import "./no_select.css";
 import { createNewUser } from "../services/user";
 import { CLIENT_URLS } from "../services/globals";
@@ -78,7 +78,7 @@ const SignUp = ({ userState }) => {
   };
 
   if (userState.user) {
-    return <AlreadyLogedIn userState={userState} />;
+    return <ModalAlreadyLogedIn userState={userState} />;
   }
 
   return (

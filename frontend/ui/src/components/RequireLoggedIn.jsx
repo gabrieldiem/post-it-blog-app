@@ -1,23 +1,8 @@
 import ModalNotLogged from "./ModalNotLogged";
+import { isUserLogged } from "../services/user";
 
 const RequireLoggedIn = ({ userState, children }) => {
-  const isLogged = () => {
-    if (!userState.user) {
-      return false;
-    }
-
-    if (!userState.user.name) {
-      return false;
-    }
-
-    if (!userState.user.creation_date) {
-      return false;
-    }
-
-    return true;
-  };
-
-  return <>{isLogged() ? children : <ModalNotLogged />}</>;
+  return <>{isUserLogged(userState.user) ? children : <ModalNotLogged />}</>;
 };
 
 export default RequireLoggedIn;

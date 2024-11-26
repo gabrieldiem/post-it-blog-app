@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { StatusCodes } from "http-status-codes";
 
-import AlreadyLogedIn from "./AlreadyLogedIn";
+import ModalAlreadyLogedIn from "./ModalAlreadyLogedIn";
 import "./no_select.css";
 
-import { getUserInfo } from "../services/user";
+import { getUserInfo, isUserLogged } from "../services/user";
 import { CLIENT_URLS } from "../services/globals";
 
 const VIOLET_PRIMARY = "#a757e4";
@@ -79,89 +79,91 @@ const Login = ({ userState }) => {
     return isValid;
   };
 
-  if (userState.user) {
-    return <AlreadyLogedIn userState={userState} />;
-  }
-
   return (
-    <Stack
-      direction="column"
-      justifyContent="space-between"
-      sx={{
-        height: "80vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: { xs: 2, sm: 4 },
-        position: "relative",
-        "&::before": {
-          content: '""',
-          position: "absolute",
-          zIndex: -1,
-          inset: 0,
-        },
-      }}
-    >
-      <MuiCard
-        variant="outlined"
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignSelf: "center",
-          backgroundColor: COLOR,
-          borderRadius: "20px",
-          width: "100%",
-          padding: 4,
-          gap: 2,
-          margin: "auto",
-          maxWidth: { sm: "450px" },
-        }}
-      >
-        <Typography component="h1" variant="h4" sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)" }}>
-          Iniciar Sesión
-        </Typography>
-        <Box
-          component="form"
-          onSubmit={handleSubmit}
-          noValidate
+    <>
+      {isUserLogged(userState.user) ? (
+        <ModalAlreadyLogedIn userState={userState} />
+      ) : (
+        <Stack
+          direction="column"
+          justifyContent="space-between"
           sx={{
+            height: "80vh",
             display: "flex",
-            flexDirection: "column",
-            width: "100%",
-            gap: 2,
+            alignItems: "center",
+            justifyContent: "center",
+            padding: { xs: 2, sm: 4 },
+            position: "relative",
+            "&::before": {
+              content: '""',
+              position: "absolute",
+              zIndex: -1,
+              inset: 0,
+            },
           }}
         >
-          <FormControl>
-            <FormLabel htmlFor="username">Username</FormLabel>
-            <TextField
-              error={usernameError}
-              helperText={usernameErrorMessage}
-              id="username"
-              type="username"
-              name="username"
-              placeholder="username"
-              autoComplete="username"
-              autoFocus
-              required
-              fullWidth
-              variant="outlined"
-              color={usernameError ? "error" : "primary"}
-            />
-          </FormControl>
-          <Button type="submit" fullWidth variant="contained" onClick={validateInputs}>
-            Iniciar Sesión
-          </Button>
-        </Box>
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-          <Typography sx={{ textAlign: "center" }}>
-            ¿Todavía no tienes cuenta?{" "}
-            <Link onClick={() => navigate(CLIENT_URLS.SIGNUP)} variant="body2" sx={{ alignSelf: "center" }} className="cursor-hand">
-              Registrarse
-            </Link>
-          </Typography>
-        </Box>
-      </MuiCard>
-    </Stack>
+          <MuiCard
+            variant="outlined"
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignSelf: "center",
+              backgroundColor: COLOR,
+              borderRadius: "20px",
+              width: "100%",
+              padding: 4,
+              gap: 2,
+              margin: "auto",
+              maxWidth: { sm: "450px" },
+            }}
+          >
+            <Typography component="h1" variant="h4" sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)" }}>
+              Iniciar Sesión
+            </Typography>
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              noValidate
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                width: "100%",
+                gap: 2,
+              }}
+            >
+              <FormControl>
+                <FormLabel htmlFor="username">Username</FormLabel>
+                <TextField
+                  error={usernameError}
+                  helperText={usernameErrorMessage}
+                  id="username"
+                  type="username"
+                  name="username"
+                  placeholder="username"
+                  autoComplete="username"
+                  autoFocus
+                  required
+                  fullWidth
+                  variant="outlined"
+                  color={usernameError ? "error" : "primary"}
+                />
+              </FormControl>
+              <Button type="submit" fullWidth variant="contained" onClick={validateInputs}>
+                Iniciar Sesión
+              </Button>
+            </Box>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+              <Typography sx={{ textAlign: "center" }}>
+                ¿Todavía no tienes cuenta?{" "}
+                <Link onClick={() => navigate(CLIENT_URLS.SIGNUP)} variant="body2" sx={{ alignSelf: "center" }} className="cursor-hand">
+                  Registrarse
+                </Link>
+              </Typography>
+            </Box>
+          </MuiCard>
+        </Stack>
+      )}
+    </>
   );
 };
 

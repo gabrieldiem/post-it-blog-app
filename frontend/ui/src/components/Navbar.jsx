@@ -12,20 +12,22 @@ import logo from "../assets/logo.png";
 const VIOLET_PRIMARY = "#a757e4";
 const VIOLET_PRIMARY_S = "#cfabeb";
 
-const pages = [{ name: "Inicio", link: CLIENT_URLS.HOME }];
-
-const settingsWithoutUser = [{ name: "Iniciar sesión", link: CLIENT_URLS.LOGIN }];
-
-const settingsWithUser = [
-  { name: "Cuenta", link: CLIENT_URLS.ACCOUNT },
-  { name: "Cerrar sesión", link: CLIENT_URLS.HOME },
-];
 
 function Navbar({ userState, children }) {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const theme = useTheme();
   const navigate = useNavigate();
+
+  const pages = [{ name: "Inicio", link: CLIENT_URLS.HOME }];
+  const settingsWithoutUser = [{ name: "Iniciar sesión", link: CLIENT_URLS.LOGIN, func: null }];
+  const settingsWithUser = [
+    { name: "Cuenta", link: CLIENT_URLS.ACCOUNT, func: null },
+    { name: "Cerrar sesión", link: null, func: () => {
+      userState.setUser(null);
+      navigate(CLIENT_URLS.HOME);
+    } },
+  ];
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);

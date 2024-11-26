@@ -40,5 +40,22 @@ async function createNewUser(username) {
   return userRes.data;
 }
 
+function isUserLogged(user){
+  if (!user) {
+    return false;
+  }
+
+  if (!user.name) {
+    return false;
+  }
+
+  if (!user.creation_date) {
+    return false;
+  }
+
+  return true;
+}
+
 export {getUserInfo};
 export {createNewUser};
+export {isUserLogged};
