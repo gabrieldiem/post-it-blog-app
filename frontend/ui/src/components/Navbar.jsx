@@ -12,10 +12,10 @@ import logo from "../assets/logo.png";
 const VIOLET_PRIMARY = "#a757e4";
 const VIOLET_PRIMARY_S = "#cfabeb";
 
-
 function Navbar({ userState, children }) {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [logout, setLogout] = useState(false);
   const theme = useTheme();
   const navigate = useNavigate();
 
@@ -23,15 +23,20 @@ function Navbar({ userState, children }) {
   const settingsWithoutUser = [{ name: "Iniciar sesión", link: CLIENT_URLS.LOGIN, func: null }];
   const settingsWithUser = [
     { name: "Cuenta", link: CLIENT_URLS.ACCOUNT, func: null },
-    { name: "Cerrar sesión", link: null, func: () => {
-      userState.setUser(null);
-      navigate(CLIENT_URLS.HOME);
-    } },
+    {
+      name: "Cerrar sesión",
+      link: null,
+      func: () => {
+        setLogout(true);
+        console.log("func");
+      },
+    },
   ];
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -169,13 +174,22 @@ function Navbar({ userState, children }) {
     </>
   );
 
-  const getAccountItems = (items) => {
+  const getAccountItems = (items, salt) => {
     return items.map((setting, i) => (
       <MenuItem
-        key={i}
+        key={i + salt}
         onClick={() => {
           handleCloseUserMenu();
-          navigate(setting.link);
+          if (setting.func) {
+            setting.func();
+          }
+          if (setting.link) {
+            console.log("link", setting.link);
+            navigate(setting.link);
+            if (setting.link == CLIENT_URLS.LOGIN) {
+              navigate(0);
+            }
+          }
         }}
       >
         <Typography sx={{ textAlign: "center" }}>
@@ -187,14 +201,41 @@ function Navbar({ userState, children }) {
     ));
   };
 
-  const [accountMenu, setAccountMenu] = useState(getAccountItems(settingsWithoutUser));
+  const [accountMenu, setAccountMenu] = useState(getAccountItems(settingsWithoutUser, 0));
 
   useEffect(() => {
     if (userState.user != null) {
-      setAccountMenu(getAccountItems(settingsWithUser));
+      setAccountMenu(getAccountItems(settingsWithUser, 1));
+      setLogout(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userState, userState.user]);
+
+  useEffect(() => {
+    if (logout) {
+      userState.setUser(null);
+      setAccountMenu(getAccountItems(settingsWithoutUser, 0));
+      navigate(CLIENT_URLS.HOME);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [logout]);
+
+  /*useEffect(() => {
+    console.log("log")
+    if (logout || !userState.user) {
+      if(!userState.user){
+        userState.setUser(null);
+      }
+      navigate(CLIENT_URLS.HOME);
+      setAccountMenu(getAccountItems(settingsWithoutUser));
+    } else if(userState.user && !logout){
+      setAccountMenu(getAccountItems(settingsWithUser));
+      setLogout(false);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userState, userState.user, logout]);*/
 
   const accountSection = (
     <>
