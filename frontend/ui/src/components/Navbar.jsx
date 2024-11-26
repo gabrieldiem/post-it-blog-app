@@ -1,19 +1,8 @@
 import { useEffect, useState } from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
+import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, Icon, Link } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
+import MenuIcon from "@mui/material/MenuItem";
 import { useTheme } from "@mui/material/styles";
-import { Icon } from "@mui/material";
-import { Link } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 import "./no_select.css";
@@ -196,7 +185,6 @@ function Navbar({ userState, children }) {
   };
 
   const [accountMenu, setAccountMenu] = useState(getAccountItems(settingsWithoutUser));
-  console.log();
 
   useEffect(() => {
     if (userState.user != null) {

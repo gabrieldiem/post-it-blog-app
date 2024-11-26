@@ -1,11 +1,4 @@
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
-import FormLabel from "@mui/material/FormLabel";
-import FormControl from "@mui/material/FormControl";
-import Link from "@mui/material/Link";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
+import { Button, Box, FormLabel, FormControl, Link, TextField, Typography, Stack } from "@mui/material";
 import MuiCard from "@mui/material/Card";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -13,7 +6,7 @@ import { useState } from "react";
 import AlreadyLogedIn from "./AlreadyLogedIn";
 import "./no_select.css";
 
-import {getUserInfo} from "../services/user";
+import { getUserInfo } from "../services/user";
 import { StatusCodes } from "http-status-codes";
 
 const VIOLET_PRIMARY = "#a757e4";
@@ -27,19 +20,19 @@ const Login = ({ userState }) => {
   const [usernameErrorMessage, setUsernameErrorMessage] = useState("");
 
   const fetchUserInfo = async (username) => {
-    try{
+    try {
       const data = await getUserInfo(username);
-      if(data && data.name){
+      if (data && data.name) {
         userState.setUser(data);
-        console.log(userState)
+        console.log(userState);
         navigate("/");
       } else {
         setUsernameError(true);
         setUsernameErrorMessage("Error de conexión con el servidor.");
       }
-    } catch(error){
+    } catch (error) {
       setUsernameError(true);
-      if(error.response && error.response.status == StatusCodes.NOT_FOUND){
+      if (error.response && error.response.status == StatusCodes.NOT_FOUND) {
         setUsernameErrorMessage("No se encontró el usuario.");
         return;
       }

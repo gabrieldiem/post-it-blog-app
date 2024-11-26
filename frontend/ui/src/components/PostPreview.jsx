@@ -1,8 +1,6 @@
-import { Card, CardHeader, CardContent, Typography } from "@mui/material";
-import { Box } from "@mui/material";
+import { Card, CardHeader, CardContent, Typography, Box } from "@mui/material";
 import { timeAgoFormatter } from "../services/globals.js";
 
-import "./PostPreview.css";
 const COLOR = "#282828";
 const YOU_STRING = "(Tú)";
 
@@ -11,7 +9,7 @@ const PostPreview = ({ post, userState }) => {
   const timeEdited = timeAgoFormatter.format(new Date(post.last_change_date));
   const commentCount = post.comments.length;
 
-  const youString = (userState.user != null && userState.user == post.username) ? YOU_STRING : "";
+  const youString = userState.user != null && userState.user == post.username ? YOU_STRING : "";
   const isEdited = post.creation_date != post.last_change_date ? ` , editado ${timeEdited}` : "";
 
   const paddingSides = "30px";

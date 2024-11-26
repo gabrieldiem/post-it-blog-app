@@ -1,11 +1,4 @@
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
-import FormLabel from "@mui/material/FormLabel";
-import FormControl from "@mui/material/FormControl";
-import Link from "@mui/material/Link";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
+import { Button, Typography, Stack } from "@mui/material";
 import MuiCard from "@mui/material/Card";
 import { useNavigate } from "react-router-dom";
 
@@ -14,10 +7,10 @@ const COLOR = "#282828";
 const AlreadyLogedIn = ({ userState }) => {
   const username = userState.user;
   const navigate = useNavigate();
-  
+
   const backToHome = () => {
     navigate("/");
-  }
+  };
 
   return (
     <Stack

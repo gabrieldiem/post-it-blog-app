@@ -6,8 +6,8 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
-import CssBaseline from "@mui/material/CssBaseline";
-import App from "./App"
+import { CssBaseline } from "@mui/material";
+import App from "./App";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

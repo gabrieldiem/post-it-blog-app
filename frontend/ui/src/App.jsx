@@ -1,13 +1,14 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
+import { useState } from "react";
+
 import "./App.css";
 
+import violetTheme from "./services/theme.js";
 import Navbar from "./components/Navbar.jsx";
 import Home from "./components/Home.jsx";
 import Login from "./components/Login.jsx";
 import PageNotFound404 from "./components/PageNotFound404.jsx";
-import violetTheme from "./services/theme.js";
-import { useState } from "react";
 import SignUp from "./components/SignUp.jsx";
 import Account from "./components/Account.jsx";
 import RequireLoggedIn from "./components/RequireLoggedIn.jsx";
