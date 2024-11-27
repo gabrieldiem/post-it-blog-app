@@ -38,7 +38,7 @@ const Post = ({ userState }) => {
         setExtras({
           timeCreated: timeCreated,
           timeEdited: timeEdited,
-          isEdited: post.creation_date != post.last_change_date ? ` , editado ${timeEdited}` : "",
+          isEdited: post.creation_date != post.last_change_date ? `, editado ${timeEdited}` : "",
           youString: userState.user != null && userState.user == post.username ? YOU_STRING : "",
         });
       } catch (error) {
@@ -75,6 +75,9 @@ const Post = ({ userState }) => {
               backgroundColor: COLOR,
               borderRadius: "20px",
               padding: "10px",
+              borderWidth: "2px",
+              borderColor: "#4b2669",
+              borderStyle: "solid",
             }}
           >
             <CardHeader sx={{ textAlign: "center" }} title={post.title} subheader={`@${post.username} ${extras.youString}`} />
@@ -95,8 +98,15 @@ const Post = ({ userState }) => {
               </Typography>
             </CardContent>
           </Card>
+          <Typography             sx={{
+              maxWidth: "70rem",
+              minWidth: "15rem",
+              margin: "2rem auto",
+            }} variant="h5" color="text.primary">
+                Comentarios
+              </Typography>
           {post.comments.map((comment, i) => {
-            return <Comment key={i} data={comment} />;
+            return <Comment key={i} data={comment} extras={extras} />;
           })}
         </Box>
       ) : null}

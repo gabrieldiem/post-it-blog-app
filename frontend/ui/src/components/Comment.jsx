@@ -12,15 +12,15 @@ import GenericDialog from "./GenericDialog";
 const COLOR = "#282828";
 const paddingSides = "30px";
 
-const Comment = ({ data }) => {
+const Comment = ({ data, extras }) => {
+  console.log(data);
   return (
     <Card
       sx={{
         maxWidth: "70rem",
         minWidth: "15rem",
-        margin: "2rem auto",
+        margin: "0.25rem auto",
         backgroundColor: COLOR,
-        borderRadius: "20px",
         padding: "10px 50px 10px 20px",
       }}
     >
@@ -31,7 +31,7 @@ const Comment = ({ data }) => {
       </CardContent>
 
       <Typography sx={{ textAlign: "right" }} variant="body2" color="text.secondary">
-        Comentó {} Creado {`${data.timeCreated}${data.isEdited}`}
+        {`@${data.username} ${extras.timeCreated}${extras.isEdited}`}
       </Typography>
     </Card>
   );
