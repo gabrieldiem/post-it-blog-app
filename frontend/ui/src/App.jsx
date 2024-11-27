@@ -12,6 +12,7 @@ import PageNotFound404 from "./components/PageNotFound404.jsx";
 import SignUp from "./components/SignUp.jsx";
 import Account from "./components/Account.jsx";
 import RequireLoggedIn from "./components/RequireLoggedIn.jsx";
+import Post from "./components/Post.jsx";
 
 import { CLIENT_URLS } from "./services/globals.js";
 
@@ -59,6 +60,15 @@ const App = () => {
           <RequireLoggedIn userState={userState}>
             <Account userState={userState} />
           </RequireLoggedIn>
+        </Navbar>
+      ),
+      errorElement: _errorElement,
+    },
+    {
+      path: `${CLIENT_URLS.POST}/:post_id`,
+      element: (
+        <Navbar userState={userState}>
+          <Post userState={userState} />
         </Navbar>
       ),
       errorElement: _errorElement,

@@ -5,7 +5,7 @@ import { useState } from "react";
 import { StatusCodes } from "http-status-codes";
 
 import ModalAlreadyLogedIn from "./ModalAlreadyLogedIn";
-import "./no_select.css";
+import "./select.css";
 import { createNewUser } from "../services/user";
 import { CLIENT_URLS } from "../services/globals";
 

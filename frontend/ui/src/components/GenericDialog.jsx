@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 
-const GenericDialog = ({ reset }) => {
+const GenericDialog = ({ reset, text }) => {
   const [open, setOpen] = useState(true);
 
   const handleClose = () => {
@@ -14,7 +14,7 @@ const GenericDialog = ({ reset }) => {
   return (
     <>
       <Dialog open={open} onClose={handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
-        <DialogTitle id="alert-dialog-title">Cambios aplicados correctamente</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{text}</DialogTitle>
         <DialogActions>
           <Button onClick={handleClose}>OK</Button>
         </DialogActions>

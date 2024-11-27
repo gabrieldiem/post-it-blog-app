@@ -88,6 +88,7 @@ const Account = ({ userState }) => {
           reset={() => {
             setShowDialog(false);
           }}
+          text="Cambios aplicados correctamente"
         />
       ) : null}
       <Box sx={{ padding: "0 30px" }}>

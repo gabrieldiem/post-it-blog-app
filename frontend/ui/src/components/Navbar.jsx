@@ -6,7 +6,7 @@ import { useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 
 import { CLIENT_URLS } from "../services/globals";
-import "./no_select.css";
+import "./select.css";
 import logo from "../assets/logo.png";
 
 const VIOLET_PRIMARY = "#a757e4";

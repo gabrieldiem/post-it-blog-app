@@ -21,24 +21,28 @@ function parseCommentsFromPost(commentsFetched) {
   return parsedComments;
 }
 
+function parsePost(post) {
+  const newPost = {
+    id: post.post_id,
+    title: post.post_title,
+    content: post.post_content,
+    attachment: post.post_attachment,
+    creation_date: post.post_creation_date,
+    last_change_date: post.post_last_change_date,
+    user_id: post.user_id,
+    username: post.user_name,
+    comments: [],
+  };
+
+  newPost.comments = parseCommentsFromPost(post.comments);
+  return newPost;
+}
+
 function parsePosts(postsFetched) {
   const parsedPosts = [];
 
   for (const post of postsFetched) {
-    const newPost = {
-      id: post.post_id,
-      title: post.post_title,
-      content: post.post_content,
-      attachment: post.post_attachment,
-      creation_date: post.post_creation_date,
-      last_change_date: post.post_last_change_date,
-      user_id: post.user_id,
-      username: post.user_name,
-      comments: [],
-    };
-
-    newPost.comments = parseCommentsFromPost(post.comments);
-    parsedPosts.push(newPost);
+    parsedPosts.push(parsePost(post));
   }
 
   return parsedPosts;
@@ -52,4 +56,14 @@ async function getPosts() {
   return parsePosts(postsFetched);
 }
 
-export default getPosts;
+async function getPostById(postId) {
+  console.log(`Fetching post with id: ${postId}`);
+  const postIdEncoded = encodeURIComponent(postId);
+  const posrUrl = `${backendUrl}/post?id=${postIdEncoded}`;
+  const postRes = await axios.get(posrUrl);
+  const postFetched = postRes.data;
+  return parsePost(postFetched);
+}
+
+export { getPosts };
+export { getPostById };
