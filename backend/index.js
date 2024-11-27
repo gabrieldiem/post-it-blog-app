@@ -5,7 +5,7 @@ import logger from "./src/logger.js";
 import initDB from "./src/init.js";
 
 import { EXIT_SUCCESS, EXIT_FAILURE } from "./src/constants.js";
-import { getPosts, getUserInfo, createNewUser } from "./src/db.js";
+import { getPosts, getUserInfo, createNewUser, updateUsername } from "./src/db.js";
 import { StatusCodes } from "http-status-codes";
 
 const PORT = process.env.PORT;
@@ -19,6 +19,11 @@ if (!db) {
 const app = express();
 
 app.use(cors());
+
+function logAffected(rowsAffected) {
+  const rowString = rowsAffected == 1 ? "row" : "rows";
+  logger.info(`${rowsAffected} ${rowString} affected`);
+}
 
 function logErrorToConsole(error, genericErrorMessage) {
   logger.error(genericErrorMessage);
@@ -107,6 +112,55 @@ app.post("/user", async (req, res) => {
     }
 
     res.send(newUserInfo);
+  } catch (error) {
+    const genericErrorMessage = "Failed creating new user";
+    logErrorToConsole(error, genericErrorMessage);
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(genericErrorMessage);
+  }
+});
+
+app.put("/user", async (req, res) => {
+  try {
+    logger.info("Requested: PUT /user");
+
+    const parsedUrl = url.parse(req.url, true);
+    const query = parsedUrl ? parsedUrl.query : null;
+
+    if (query == null) {
+      throw Error("No param present in query string");
+    }
+
+    const newUsername = query.new_username;
+    const newUserInfo = await getUserInfo(newUsername, db);
+
+    if (newUserInfo.length != 0) {
+      logger.warn("User already exists");
+      res.status(StatusCodes.CONFLICT).send("User already exists");
+      return;
+    }
+
+    const oldUsername = query.old_username;
+    const oldUserInfo = await getUserInfo(oldUsername, db);
+
+    if (oldUserInfo.length == 0) {
+      logger.warn("No user to change name to");
+      res.status(StatusCodes.NOT_FOUND).send("No user to change name to");
+      return;
+    }
+
+    await updateUsername(newUsername, oldUsername, db);
+
+    const newUserInfoCheck = await getUserInfo(newUsername, db);
+    
+    const affected = newUserInfoCheck.length;
+    logAffected(affected);
+    if (affected == 0) {
+      logger.warn("Error during using creation");
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).send("Error during using creation");
+      return;
+    }
+
+    res.send(newUserInfoCheck);
   } catch (error) {
     const genericErrorMessage = "Failed creating new user";
     logErrorToConsole(error, genericErrorMessage);

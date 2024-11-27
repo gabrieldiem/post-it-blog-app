@@ -82,6 +82,33 @@ async function createNewUser(username, db) {
   await db.runP("END TRANSACTION");
 }
 
+async function updateUsername(newUsername, oldUsername, db) {
+  if (oldUsername == null || oldUsername.length == 0 || oldUsername.length > MAX_USERNAME) {
+    throw Error("Invalid username");
+  }
+
+  if (newUsername == null || newUsername.length == 0 || newUsername.length > MAX_USERNAME) {
+    throw Error("Invalid username");
+  }
+
+  const currentTimeEpochMs = Date.now();
+
+  await db.runP("BEGIN TRANSACTION");
+
+  const statement = db.prepare(`
+    UPDATE user
+    SET name = ?, last_change_date = ?
+    WHERE name = "${oldUsername}"
+  `);
+
+  statement.runP = promisify(statement.run);
+  statement.finalizeP = promisify(statement.finalize);
+  await statement.runP(newUsername, currentTimeEpochMs);
+  await statement.finalizeP();
+  await db.runP("END TRANSACTION");
+}
+
 export { getPosts };
 export { getUserInfo };
 export { createNewUser };
+export { updateUsername };
