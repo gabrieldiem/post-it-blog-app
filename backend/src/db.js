@@ -1,5 +1,5 @@
 import { promisify } from "util";
-import { MAX_USERNAME } from "./constants.js";
+import { MAX_USERNAME, MAX_POST_TITLE, MAX_CONTENT } from "./constants.js";
 import { logger } from "./logger.js";
 import initDB from "./init.js";
 
@@ -48,6 +48,8 @@ async function getPosts(db) {
       post
     JOIN
       user ON post.user_id = user.id
+    ORDER BY
+      post_id DESC;
   `);
 
   for (const post of posts) {
@@ -162,9 +164,37 @@ async function getPostInfo(post_id, db) {
   return post;
 }
 
+async function  createPost(title, content, userInfo, db) {
+  console.log(userInfo);
+  if (title.length > MAX_POST_TITLE) {
+    throw Error("Title too long");
+  }
+
+  if (content.length > MAX_CONTENT) {
+    throw Error("Content too long");
+  }
+
+  const currentTimeEpochMs = Date.now();
+
+  await db.runP("BEGIN TRANSACTION");
+
+  const statement = db.prepare(`
+    INSERT INTO post (title, content, attachment, creation_date, last_change_date, user_id) 
+    VALUES (?, ?, ?, ?, ?, ?) 
+  `);
+
+  statement.runP = promisify(statement.run);
+  statement.finalizeP = promisify(statement.finalize);
+
+  await statement.runP(title, content, null, currentTimeEpochMs, currentTimeEpochMs, userInfo.user_id);
+  await statement.finalizeP();
+  await db.runP("END TRANSACTION");
+}
+
 export { getDb };
 export { getPosts };
 export { getUserInfo };
 export { createNewUser };
 export { updateUsername };
 export { getPostInfo };
+export { createPost };

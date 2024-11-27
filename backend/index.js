@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import bodyParser from "body-parser";
 import { logger } from "./src/logger.js";
 
 import { EXIT_SUCCESS, EXIT_FAILURE } from "./src/constants.js";
@@ -16,6 +17,7 @@ const PORT = process.env.PORT;
 const app = express();
 app.use(cors());
 
+app.use(bodyParser.json());
 app.use(rootRouter);
 app.use(userRouter);
 app.use(postRouter);
