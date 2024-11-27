@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, Icon, Link } from "@mui/material";
+import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, Icon, Link, Divider } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import MenuIcon from "@mui/material/MenuItem";
 import { useTheme } from "@mui/material/styles";
@@ -19,8 +19,12 @@ function Navbar({ userState, children }) {
   const theme = useTheme();
   const navigate = useNavigate();
 
-  const pages = [{ name: "Inicio", link: CLIENT_URLS.HOME }];
   const settingsWithoutUser = [{ name: "Iniciar sesión", link: CLIENT_URLS.LOGIN, func: null }];
+  const pages = [
+    { name: "Inicio", link: CLIENT_URLS.HOME },
+    { name: "Crear Post", link: CLIENT_URLS.CREATE_POST },
+  ];
+
   const settingsWithUser = [
     { name: "Cuenta", link: CLIENT_URLS.ACCOUNT, func: null },
     {
@@ -116,7 +120,7 @@ function Navbar({ userState, children }) {
   const pagesSectionMobile = (
     <>
       <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-        <IconButton size="large" aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleOpenNavMenu} color="inherit">
+        <IconButton size="large" aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleOpenNavMenu} color="white">
           <MenuIcon />
         </IconButton>
         <Menu
@@ -158,18 +162,20 @@ function Navbar({ userState, children }) {
   const pagesSectionDesktop = (
     <>
       <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-        {pages.map((page, i) => (
-          <Button
-            key={i}
-            onClick={() => {
-              handleCloseNavMenu();
-              navigate(page.link);
-            }}
-            sx={{ my: 2, color: VIOLET_PRIMARY_S, display: "block" }}
-          >
-            {page.name}
-          </Button>
-        ))}
+        {pages.map((page, i) => {
+          return (
+            <Button
+              key={i}
+              onClick={() => {
+                handleCloseNavMenu();
+                navigate(page.link);
+              }}
+              sx={{ my: 2, color: VIOLET_PRIMARY_S, display: "block" }}
+            >
+              {page.name}
+            </Button>
+          );
+        })}
       </Box>
     </>
   );

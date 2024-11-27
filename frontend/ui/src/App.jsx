@@ -13,6 +13,7 @@ import SignUp from "./components/SignUp.jsx";
 import Account from "./components/Account.jsx";
 import RequireLoggedIn from "./components/RequireLoggedIn.jsx";
 import Post from "./components/Post.jsx";
+import CreatePost from "./components/CreatePost.jsx";
 
 import { CLIENT_URLS } from "./services/globals.js";
 
@@ -69,6 +70,17 @@ const App = () => {
       element: (
         <Navbar userState={userState}>
           <Post userState={userState} />
+        </Navbar>
+      ),
+      errorElement: _errorElement,
+    },
+    {
+      path: `${CLIENT_URLS.CREATE_POST}`,
+      element: (
+        <Navbar userState={userState}>
+          <RequireLoggedIn userState={userState}>
+            <CreatePost userState={userState} />
+          </RequireLoggedIn>
         </Navbar>
       ),
       errorElement: _errorElement,

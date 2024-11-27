@@ -11,6 +11,7 @@ const CLIENT_URLS = {
   LOGIN: "/login",
   ACCOUNT: "/account",
   POST: "/post",
+  CREATE_POST: "/create",
 };
 
 export { timeAgoFormatter, CLIENT_URLS };

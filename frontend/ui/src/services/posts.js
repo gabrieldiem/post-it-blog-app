@@ -65,5 +65,15 @@ async function getPostById(postId) {
   return parsePost(postFetched);
 }
 
+async function createPost(title, content, username) {
+  console.log("Creating post");
+  const posrUrl = `${backendUrl}/post`;
+  const postRes = await axios.post(posrUrl, {title: title, content: content, username: username});
+  const res = postRes.data;
+  console.log(res)
+  return res == "OK";
+} 
+
 export { getPosts };
 export { getPostById };
+export { createPost };

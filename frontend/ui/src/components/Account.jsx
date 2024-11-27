@@ -14,11 +14,6 @@ const Account = ({ userState }) => {
   const [usernameError, setUsernameError] = useState(false);
   const [usernameErrorMessage, setUsernameErrorMessage] = useState("");
   const [showDialog, setShowDialog] = useState(false);
-  if (userState.user == null) {
-    userState.user = {};
-    userState.user.name = "test";
-    userState.user.creation_date = Date.now();
-  }
   const timeJoined = timeAgoFormatter.format(new Date(userState.user.creation_date));
   const paddingSides = "30px";
 
