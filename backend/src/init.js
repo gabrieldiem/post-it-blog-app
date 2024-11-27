@@ -4,7 +4,7 @@ import sqlite3_ from "sqlite3";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import csvParser from "csvtojson";
-import logger from "./logger.js";
+import {logger} from "./logger.js";
 import { DB_DIR_NAME, DB_PERSISTENCE_NAME, MAX_USERNAME, MAX_POST_TITLE } from "./constants.js";
 
 const fsPromises = fs.promises;

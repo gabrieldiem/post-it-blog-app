@@ -1,5 +1,17 @@
 import { promisify } from "util";
 import { MAX_USERNAME } from "./constants.js";
+import { logger } from "./logger.js";
+import initDB from "./init.js";
+
+const db = await initDB();
+if (!db) {
+  logger.fatal("Finishing execution");
+  process.exit(EXIT_FAILURE);
+}
+
+function getDb(){
+  return db;
+}
 
 async function getPosts(db) {
   const posts = await db.allP(`
@@ -112,3 +124,4 @@ export { getPosts };
 export { getUserInfo };
 export { createNewUser };
 export { updateUsername };
+export { getDb };
