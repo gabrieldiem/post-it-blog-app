@@ -56,6 +56,23 @@ function isUserLogged(user){
   return true;
 }
 
+async function updateUsername(oldUsername, newUsername){
+  console.log("Updating username");
+  const oldUsernameEncoded = encodeURIComponent(oldUsername);
+  const newUsernameEncoded = encodeURIComponent(newUsername);
+  const getUserUrl = `${backendUrl}/user?old_username=${oldUsernameEncoded}&new_username=${newUsernameEncoded}`;
+  const userRes = await axios.put(getUserUrl);
+  
+  if(userRes.data && userRes.data[0]){
+    const userFetched = userRes.data[0];
+    console.log(userFetched);
+    return parseUserInfo(userFetched);
+  }
+
+  return userRes.data;
+}
+
 export {getUserInfo};
 export {createNewUser};
 export {isUserLogged};
+export {updateUsername};
