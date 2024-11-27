@@ -9,8 +9,28 @@ if (!db) {
   process.exit(EXIT_FAILURE);
 }
 
-function getDb(){
+function getDb() {
   return db;
+}
+
+async function getCommentFromPostId(postId, db) {
+  const comments = await db.allP(`
+    SELECT 
+      comment.id AS comment_id,
+      comment.content AS comment_content,
+      comment.creation_date AS comment_creation_date,
+      comment.last_change_date AS comment_last_change_date,
+      user.id AS user_id,
+      user.name AS user_name
+    FROM 
+      comment
+    JOIN
+      user ON comment.user_id = user.id
+    WHERE
+     comment.post_id = ${postId}
+  `);
+
+  return comments;
 }
 
 async function getPosts(db) {
@@ -31,23 +51,7 @@ async function getPosts(db) {
   `);
 
   for (const post of posts) {
-    const postId = post.post_id;
-    const comments = await db.allP(`
-      SELECT 
-        comment.id AS comment_id,
-        comment.content AS comment_content,
-        comment.creation_date AS comment_creation_date,
-        comment.last_change_date AS comment_last_change_date,
-        user.id AS user_id,
-        user.name AS user_name
-      FROM 
-        comment
-      JOIN
-        user ON comment.user_id = user.id
-      WHERE
-       comment.post_id = ${postId}
-    `);
-    post.comments = comments;
+    post.comments = await getCommentFromPostId(post.post_id, db);
   }
 
   return posts;
@@ -120,8 +124,47 @@ async function updateUsername(newUsername, oldUsername, db) {
   await db.runP("END TRANSACTION");
 }
 
+async function getPostInfo(post_id, db) {
+  if (post_id == null || post_id < 0) {
+    throw Error("Invalid post id");
+  }
+  const postId = Number(post_id).toString();
+  const postInfo = await db.allP(`
+    SELECT 
+      post.id AS post_id ,
+      post.title AS post_title ,
+      post.content AS post_content, 
+      post.attachment AS post_attachment, 
+      post.creation_date AS post_creation_date, 
+      post.last_change_date AS post_last_change_date, 
+      post.user_id AS post_user_id,
+      user.id AS user_id,
+      user.name AS user_name
+    FROM 
+      post
+    JOIN
+      user ON post.user_id = user.id
+    WHERE
+      post.id = ${postId}
+  `);
+
+  if (post_id == null || post_id < 0) {
+    throw Error("Invalid post id");
+  }
+
+  if (postInfo.length == 0) {
+    return postInfo;
+  }
+
+  const post = postInfo[0];
+  post.comments = await getCommentFromPostId(post.post_id, db);
+
+  return post;
+}
+
+export { getDb };
 export { getPosts };
 export { getUserInfo };
 export { createNewUser };
 export { updateUsername };
-export { getDb };
+export { getPostInfo };

@@ -1,6 +1,6 @@
 import express from "express";
 import url from "url";
-import { logger, logAffected, logErrorMessageToConsole } from "../logger.js"; 
+import { logger, logAffected, logErrorMessageToConsole } from "../logger.js";
 
 import { StatusCodes } from "http-status-codes";
 

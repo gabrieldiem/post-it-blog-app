@@ -1,5 +1,5 @@
 import express from "express";
-import { logger,logErrorMessageToConsole } from "../logger.js";
+import { logger, logErrorMessageToConsole } from "../logger.js";
 import { StatusCodes } from "http-status-codes";
 
 import { getDb } from "../db.js";
