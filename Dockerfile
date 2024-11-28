@@ -8,6 +8,8 @@ WORKDIR /
 # Copy the rest of the application files
 COPY . .
 
+RUN chmod +x scripts/setup_docker.sh
+
 RUN scripts/setup_docker.sh
 
 # Expose the port the app runs on
