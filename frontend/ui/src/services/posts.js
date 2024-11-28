@@ -1,6 +1,8 @@
 import axios from "axios";
-const BACKEND_SERVER_PORT = 3001;
-const backendUrl = `http://localhost:${BACKEND_SERVER_PORT}`;
+
+const BACKEND_SERVER_PORT = 8081;
+const VITE_BASE_PATH_BACKEND_SERVER = import.meta.env.VITE_BASE_PATH_BACKEND_SERVER;
+const backendUrl = `http://${VITE_BASE_PATH_BACKEND_SERVER}:${BACKEND_SERVER_PORT}`;
 
 function parseCommentsFromPost(commentsFetched) {
   const parsedComments = [];

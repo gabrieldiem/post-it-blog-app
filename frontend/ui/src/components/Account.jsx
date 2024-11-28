@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Card, CardHeader, CardContent, Typography, Box, Divider, FormControl, FormLabel, TextField, Button } from "@mui/material";
-import { timeAgoFormatter } from "../services/globals.js";
+import { CLIENT_URLS, timeAgoFormatter } from "../services/globals.js";
 import { StatusCodes } from "http-status-codes";
+import {useNavigate} from "react-router-dom";
 
-import { updateUsername } from "../services/user.js";
+import { updateUsername, deleteUser } from "../services/user.js";
 import GenericDialog from "./GenericDialog.jsx";
 
 const COLOR = "#282828";
@@ -14,8 +15,30 @@ const Account = ({ userState }) => {
   const [usernameError, setUsernameError] = useState(false);
   const [usernameErrorMessage, setUsernameErrorMessage] = useState("");
   const [showDialog, setShowDialog] = useState(false);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const timeJoined = timeAgoFormatter.format(new Date(userState.user.creation_date));
   const paddingSides = "30px";
+  const navigate = useNavigate();
+
+  const deleteAccountHandlerAux = async () => {
+    try {
+      const res = await deleteUser(userState.user.name);
+      if (res) {
+        userState.setUser(null);
+        setShowDeleteDialog(true);
+      } else {
+        setUsernameError(true);
+        setUsernameErrorMessage("Error de conexión con el servidor.");
+      }
+    } catch (error) {
+      setUsernameError(true);
+      setUsernameErrorMessage("Error de conexión con el servidor.");
+    }
+  };
+
+  const deleteAccountHandler = () => {
+    deleteAccountHandlerAux();
+  };
 
   const performUpdate = async (username) => {
     try {
@@ -84,6 +107,15 @@ const Account = ({ userState }) => {
             setShowDialog(false);
           }}
           text="Cambios aplicados correctamente"
+        />
+      ) : null}
+      {showDeleteDialog ? (
+        <GenericDialog
+          reset={() => {
+            setShowDeleteDialog(false);
+            navigate(CLIENT_URLS.HOME);
+          }}
+          text="Usuario eliminado con éxito"
         />
       ) : null}
       <Box sx={{ padding: "0 30px" }}>
@@ -170,6 +202,30 @@ const Account = ({ userState }) => {
                 Actualizar datos
               </Button>
             </Box>
+          </Box>
+          <Divider />
+          <CardHeader sx={{ textAlign: "left" }} title={<Typography sx={{ textAlign: "left", fontSize: "30px", marginLeft: "10px" }}>Eliminar cuenta</Typography>} />
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignContent: "center",
+              alignItems: "center",
+              width: "100%",
+              marginTop: "20px",
+              paddingBottom: "30px",
+            }}
+          >
+            <Button
+              sx={{
+                width: "40%",
+              }}
+              variant="contained"
+              color="error"
+              onClick={deleteAccountHandler}
+            >
+              Eliminar cuenta
+            </Button>
           </Box>
         </Card>
       </Box>
