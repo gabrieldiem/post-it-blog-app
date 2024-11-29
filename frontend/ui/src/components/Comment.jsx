@@ -1,39 +1,106 @@
-import { Card, CardHeader, CardContent, Typography, Box } from "@mui/material";
-import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Card, CardContent, Typography, Box, IconButton, Grid2, Tooltip } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 
-import { getPostById } from "../services/posts";
-import PostPreview from "./PostPreview";
-import { timeAgoFormatter } from "../services/globals.js";
+import { useNavigate } from "react-router-dom";
 import { CLIENT_URLS } from "../services/globals";
 import GenericDialog from "./GenericDialog";
+import { deleteComment } from "../services/comment.js";
+import { timeAgoFormatter } from "../services/globals";
 
 const COLOR = "#282828";
 const paddingSides = "30px";
 
-const Comment = ({ data, extras }) => {
-  console.log(data);
-  return (
-    <Card
-      sx={{
-        maxWidth: "70rem",
-        minWidth: "15rem",
-        margin: "0.25rem auto",
-        backgroundColor: COLOR,
-        padding: "10px 50px 10px 20px",
-      }}
-    >
-      <CardContent sx={{ paddingRight: paddingSides, paddingLeft: paddingSides }}>
-        <Typography sx={{ textAlign: "left" }} variant="body" color="text.primary">
-          {data.content}
-        </Typography>
-      </CardContent>
+const Comment = ({ userState, comment, setPost }) => {
+  const [isUser, setIsUser] = useState(false);
+  const [showDialog, setShowDialog] = useState(false);
+  const [checkIsUser, setCheckIsUser] = useState(false);
+  const timeCreated = timeAgoFormatter.format(new Date(comment.creation_date));
+  const timeEdited = timeAgoFormatter.format(new Date(comment.last_change_date));
+  const isEdited = comment.creation_date != comment.last_change_date ? `, editado ${timeEdited}` : "";
 
-      <Typography sx={{ textAlign: "right" }} variant="body2" color="text.secondary">
-        {`@${data.username} ${extras.timeCreated}${extras.isEdited}`}
-      </Typography>
-    </Card>
+  const deleteCommentHandler = async () => {
+    try {
+      const res = await deleteComment(comment.id, userState.user.name);
+      if (res) {
+        setCheckIsUser(true);
+        setIsUser(false);
+        setPost((prev) => {
+          const prevCopy = structuredClone(prev);
+          prevCopy.comments = prevCopy.comments.filter((_comment) => comment.id !== _comment.id);
+          return prevCopy;
+        });
+      } else {
+        setShowDialog(true);
+      }
+    } catch (error) {
+      setShowDialog(true);
+    }
+  };
+
+  const editCommentHandler = () => {};
+
+  useEffect(() => {
+    if (userState && userState.user && userState.user.id === comment.user_id) {
+      setIsUser(true);
+      if (checkIsUser) {
+        setCheckIsUser(false);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userState, checkIsUser, comment]);
+
+  return (
+    <>
+      {showDialog ? (
+        <GenericDialog
+          text="Error al eliminar el comentario"
+          reset={() => {
+            setShowDialog(false);
+          }}
+        />
+      ) : null}
+      <Card
+        sx={{
+          maxWidth: "70rem",
+          minWidth: "15rem",
+          margin: "0.25rem auto",
+          backgroundColor: COLOR,
+          padding: "10px 50px 10px 20px",
+        }}
+      >
+        <CardContent sx={{ paddingRight: paddingSides, paddingLeft: paddingSides }}>
+          <Typography sx={{ textAlign: "left" }} variant="body" color="text.primary">
+            {comment.content}
+          </Typography>
+        </CardContent>
+
+        <Grid2 container spacing={1}>
+          <Grid2 size={2}>
+            {isUser ? (
+              <>
+                <Tooltip title="Eliminar comentario">
+                  <IconButton aria-label="delete" onClick={deleteCommentHandler}>
+                    <DeleteIcon />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Editar comentario" onClick={editCommentHandler}>
+                  <IconButton aria-label="edit">
+                    <EditIcon />
+                  </IconButton>
+                </Tooltip>
+              </>
+            ) : null}
+          </Grid2>
+          <Grid2 size={10} sx={{ alignContent: "center" }}>
+            <Typography sx={{ textAlign: "right" }} variant="body2" color="text.secondary">
+              {`@${comment.username} ${timeCreated}${isEdited}`}
+            </Typography>
+          </Grid2>
+        </Grid2>
+      </Card>
+    </>
   );
 };
 

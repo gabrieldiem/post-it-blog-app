@@ -1,9 +1,5 @@
 import axios from "axios";
-
-const BACKEND_SERVER_PORT = 8081;
-const VITE_BASE_PATH_BACKEND_SERVER = import.meta.env.VITE_BASE_PATH_BACKEND_SERVER;
-const backendUrl = `http://${VITE_BASE_PATH_BACKEND_SERVER}:${BACKEND_SERVER_PORT}`;
-console.log(backendUrl)
+import { BACKEND_URL } from "./globals";
 
 function parseUserInfo(userInfo) {
   return {
@@ -16,7 +12,7 @@ function parseUserInfo(userInfo) {
 async function getUserInfo(username) {
   console.log("Validating username");
   const usernameEncoded = encodeURIComponent(username);
-  const getUserUrl = `${backendUrl}/user?username=${usernameEncoded}`;
+  const getUserUrl = `${BACKEND_URL}/user?username=${usernameEncoded}`;
   const userRes = await axios.get(getUserUrl);
 
   if(userRes.data && userRes.data[0]){
@@ -31,7 +27,7 @@ async function getUserInfo(username) {
 async function createNewUser(username) {
   console.log("Creating new user");
   const usernameEncoded = encodeURIComponent(username);
-  const getUserUrl = `${backendUrl}/user?username=${usernameEncoded}`;
+  const getUserUrl = `${BACKEND_URL}/user?username=${usernameEncoded}`;
   const userRes = await axios.post(getUserUrl);
 
   if(userRes.data && userRes.data[0]){
@@ -63,7 +59,7 @@ async function updateUsername(oldUsername, newUsername){
   console.log("Updating username");
   const oldUsernameEncoded = encodeURIComponent(oldUsername);
   const newUsernameEncoded = encodeURIComponent(newUsername);
-  const getUserUrl = `${backendUrl}/user?old_username=${oldUsernameEncoded}&new_username=${newUsernameEncoded}`;
+  const getUserUrl = `${BACKEND_URL}/user?old_username=${oldUsernameEncoded}&new_username=${newUsernameEncoded}`;
   const userRes = await axios.put(getUserUrl);
   
   if(userRes.data && userRes.data[0]){
@@ -78,7 +74,7 @@ async function updateUsername(oldUsername, newUsername){
 async function deleteUser(username) {
   console.log("Deleting user");
   const usernameEncoded = encodeURIComponent(username);
-  const getUserUrl = `${backendUrl}/user?username=${usernameEncoded}`;
+  const getUserUrl = `${BACKEND_URL}/user?username=${usernameEncoded}`;
   const userRes = await axios.delete(getUserUrl);
 
   const res = userRes.data;

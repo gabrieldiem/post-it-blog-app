@@ -59,7 +59,18 @@ const PostPreview = ({ post, userState }) => {
         </Typography>
 
         <CardContent sx={{ paddingRight: paddingSides, paddingLeft: paddingSides }}>
-          <Typography sx={{ textAlign: "left" }} variant="body" color="text.primary">
+          <Typography
+            sx={{
+              textAlign: "left",
+              display: "-webkit-box",
+              WebkitLineClamp: 5,
+              WebkitBoxOrient: "vertical",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+            variant="body"
+            color="text.primary"
+          >
             {post.content}
           </Typography>
 

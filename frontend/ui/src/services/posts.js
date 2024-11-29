@@ -1,8 +1,5 @@
 import axios from "axios";
-
-const BACKEND_SERVER_PORT = 8081;
-const VITE_BASE_PATH_BACKEND_SERVER = import.meta.env.VITE_BASE_PATH_BACKEND_SERVER;
-const backendUrl = `http://${VITE_BASE_PATH_BACKEND_SERVER}:${BACKEND_SERVER_PORT}`;
+import { BACKEND_URL } from "./globals";
 
 function parseCommentsFromPost(commentsFetched) {
   const parsedComments = [];
@@ -52,7 +49,7 @@ function parsePosts(postsFetched) {
 
 async function getPosts() {
   console.log("Fetching all posts");
-  const allPostsUrl = `${backendUrl}/posts`;
+  const allPostsUrl = `${BACKEND_URL}/posts`;
   const postsRes = await axios.get(allPostsUrl);
   const postsFetched = postsRes.data;
   return parsePosts(postsFetched);
@@ -61,7 +58,7 @@ async function getPosts() {
 async function getPostById(postId) {
   console.log(`Fetching post with id: ${postId}`);
   const postIdEncoded = encodeURIComponent(postId);
-  const posrUrl = `${backendUrl}/post?id=${postIdEncoded}`;
+  const posrUrl = `${BACKEND_URL}/post?id=${postIdEncoded}`;
   const postRes = await axios.get(posrUrl);
   const postFetched = postRes.data;
   return parsePost(postFetched);
@@ -69,7 +66,7 @@ async function getPostById(postId) {
 
 async function createPost(title, content, username) {
   console.log("Creating post");
-  const posrUrl = `${backendUrl}/post`;
+  const posrUrl = `${BACKEND_URL}/post`;
   const postRes = await axios.post(posrUrl, {title: title, content: content, username: username});
   const res = postRes.data;
   console.log(res)

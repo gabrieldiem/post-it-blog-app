@@ -1,7 +1,10 @@
-import { Card, CardHeader, CardContent, Typography, Box } from "@mui/material";
+import { Card, CardHeader, CardContent, Typography, Box, IconButton, Tooltip, List, Collapse, ListItem, ListItemText } from "@mui/material";
+import { Grid2 as Grid } from "@mui/material";
+import { TransitionGroup } from "react-transition-group";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import AddCommentIcon from "@mui/icons-material/AddComment";
 
 import { getPostById } from "../services/posts";
 import PostPreview from "./PostPreview";
@@ -12,6 +15,7 @@ import GenericDialog from "./GenericDialog";
 import Comment from "./Comment.jsx";
 
 import "./select.css";
+import CreateComment from "./CreateComment.jsx";
 const VIOLET_PRIMARY = "#a757e4";
 const COLOR = "#282828";
 const YOU_STRING = "(Tú)";
@@ -22,31 +26,49 @@ const Post = ({ userState }) => {
   const [extras, setExtras] = useState(null);
   const [errorDialog, setErrorDialog] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-
   const { post_id } = useParams();
-  const navigate = useNavigate();
+
+  const [createComment, setCreateComment] = useState(false);
+
+  const handleShowCreateComment = () => {
+    setCreateComment((prev) => !prev);
+  };
+
+  const createCommentComponentTransitioned = (
+    <List sx={{ mt: 1 }}>
+      <TransitionGroup>
+        {createComment ? (
+          <Collapse>
+            <ListItem>
+              <CreateComment userState={userState} postId={post.id} func={fetchPost} />
+            </ListItem>
+          </Collapse>
+        ) : null}
+      </TransitionGroup>
+    </List>
+  );
+
+  async function fetchPost() {
+    try {
+      const post = await getPostById(post_id);
+      setPost(post);
+
+      const timeCreated = timeAgoFormatter.format(new Date(post.creation_date));
+      const timeEdited = timeAgoFormatter.format(new Date(post.last_change_date));
+
+      setExtras({
+        timeCreated: timeCreated,
+        timeEdited: timeEdited,
+        isEdited: post.creation_date != post.last_change_date ? `, editado ${timeEdited}` : "",
+        youString: userState.user != null && userState.user == post.username ? YOU_STRING : "",
+      });
+    } catch (error) {
+      setErrorMessage("Error al cargar el post");
+      setErrorDialog(true);
+    }
+  }
 
   useEffect(() => {
-    async function fetchPost() {
-      try {
-        const post = await getPostById(post_id);
-        setPost(post);
-
-        const timeCreated = timeAgoFormatter.format(new Date(post.creation_date));
-        const timeEdited = timeAgoFormatter.format(new Date(post.last_change_date));
-
-        setExtras({
-          timeCreated: timeCreated,
-          timeEdited: timeEdited,
-          isEdited: post.creation_date != post.last_change_date ? `, editado ${timeEdited}` : "",
-          youString: userState.user != null && userState.user == post.username ? YOU_STRING : "",
-        });
-      } catch (error) {
-        setErrorMessage("Error al cargar el post");
-        setErrorDialog(true);
-      }
-    }
-
     fetchPost();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -65,6 +87,7 @@ const Post = ({ userState }) => {
         <Box
           sx={{
             padding: "0 30px",
+            marginBottom: "50px",
           }}
         >
           <Card
@@ -98,16 +121,41 @@ const Post = ({ userState }) => {
               </Typography>
             </CardContent>
           </Card>
-          <Typography             sx={{
+          <Typography
+            sx={{
               maxWidth: "70rem",
               minWidth: "15rem",
               margin: "2rem auto",
-            }} variant="h5" color="text.primary">
-                Comentarios
-              </Typography>
-          {post.comments.map((comment, i) => {
-            return <Comment key={i} data={comment} extras={extras} />;
-          })}
+              marginBottom: "0rem",
+            }}
+            variant="h5"
+            color="text.primary"
+          >
+            Comentarios{" "}
+            {userState && userState.user ? (
+              <Tooltip title="Agregar comentario">
+                <IconButton onClick={handleShowCreateComment}>
+                  <AddCommentIcon />
+                </IconButton>
+              </Tooltip>
+            ) : (
+              <Tooltip title="Debes iniciar sesión para agregar un comentario">
+                <span>
+                  <IconButton disabled>
+                    <AddCommentIcon />
+                  </IconButton>
+                </span>
+              </Tooltip>
+            )}
+          </Typography>
+
+          {createCommentComponentTransitioned}
+
+          {post.comments
+            .sort((a, b) => new Date(a.creation_date) - new Date(b.creation_date))
+            .map((comment, i) => {
+              return <Comment key={i} userState={userState} comment={comment} setPost={setPost} />;
+            })}
         </Box>
       ) : null}
     </>
