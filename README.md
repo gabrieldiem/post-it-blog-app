@@ -4,11 +4,11 @@ Una sencilla webapp para hacer blogs, con uso de base de datos SQL para almacena
 
 ## Cómo ejecutarlo
 
-El frontend será accesible mediante el puerto 3000 vía: <a href="http://localhost:3000" target="_blank">http://localhost:3000</a>, mientras que el backend será accesible mediante el puerto 3001 vía: <a href="http://localhost:3001" target="_blank">http://localhost:3001</a>.
+El frontend será accesible mediante el puerto 3000 vía: <a href="http://localhost:8080" target="_blank">http://localhost:8080</a>, mientras que el backend será accesible mediante el puerto 3001 vía: <a href="http://localhost:8081" target="_blank">http://localhost:8081</a>.
 
 ### Nativamente local
 
-El modo local instala NodeJS v22 con NVM (Node Version Management). 
+El modo local instala NodeJS v22 con NVM (Node Version Management).
 
 1. Para hacer el setup en modo `development` correr:
 
@@ -35,9 +35,21 @@ docker build -t blog-app .
 2. Para correr el container:
 
 ```shell
-docker run -p 3000:3000 -p 3001:3001 blog-app
+docker run -p 8080:8080 -p 8081:8081 blog-app
 ```
 
 ## Cómo hacer setup del repo
 
+## Deployment
 
+1. Tag image:
+
+```shell
+docker image tag blog-app gabrieldiem/gprivate:blog-app
+```
+
+2. Pushed image:
+
+```shell
+docker image push gabrieldiem/gprivate:blog-app
+```

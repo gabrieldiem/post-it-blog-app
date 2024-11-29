@@ -7,7 +7,7 @@ import logger from "./src/logger.js";
 import { ENTRY_POINT_HTML, TARGET_FOLDER_NAME } from "./src/constants.js";
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.UI_SERVER_PORT;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

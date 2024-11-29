@@ -32,4 +32,6 @@ fi
 
 "$SCRIPT_DIR"/../backend/setup_backend.sh --"$BUILD_MODE"
 
+npm cache clean --force
+
 print_colored_message $GREEN_BOLD "══ Finished setup ══"
