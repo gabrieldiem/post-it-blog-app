@@ -136,7 +136,7 @@ userRouter.delete("/user", async (req, res) => {
 
     if (userInfo.length == 0) {
       logger.warn("User does not exist");
-      res.status(StatusCodes.CONFLICT).send("User does not exist");
+      res.status(StatusCodes.NOT_FOUND).send("User does not exist");
       return;
     }
 

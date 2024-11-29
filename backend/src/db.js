@@ -13,7 +13,7 @@ function getDb() {
   return db;
 }
 
-async function getCommentFromPostId(postId, db) {
+async function getCommentsFromPostId(postId, db) {
   const comments = await db.allP(`
     SELECT 
       comment.id AS comment_id,
@@ -53,10 +53,25 @@ async function getPosts(db) {
   `);
 
   for (const post of posts) {
-    post.comments = await getCommentFromPostId(post.post_id, db);
+    post.comments = await getCommentsFromPostId(post.post_id, db);
   }
 
   return posts;
+}
+
+async function getUserInfoById(userId, db) {
+  const userInfo = await db.allP(`
+    SELECT 
+      user.id AS user_id,
+      user.name AS user_name,
+      user.creation_date AS user_creation_date
+    FROM 
+      user
+    WHERE
+      user.id = ${userId};
+  `);
+
+  return userInfo;
 }
 
 async function getUserInfo(username, db) {
@@ -130,6 +145,7 @@ async function getPostInfo(post_id, db) {
   if (post_id == null || post_id < 0) {
     throw Error("Invalid post id");
   }
+
   const postId = Number(post_id).toString();
   const postInfo = await db.allP(`
     SELECT 
@@ -150,21 +166,17 @@ async function getPostInfo(post_id, db) {
       post.id = ${postId}
   `);
 
-  if (post_id == null || post_id < 0) {
-    throw Error("Invalid post id");
-  }
-
   if (postInfo.length == 0) {
     return postInfo;
   }
 
   const post = postInfo[0];
-  post.comments = await getCommentFromPostId(post.post_id, db);
+  post.comments = await getCommentsFromPostId(post.post_id, db);
 
   return post;
 }
 
-async function  createPost(title, content, userInfo, db) {
+async function createPost(title, content, userInfo, db) {
   console.log(userInfo);
   if (title.length > MAX_POST_TITLE) {
     throw Error("Title too long");
@@ -196,8 +208,6 @@ async function deleteUser(username, db) {
     throw Error("Invalid username");
   }
 
-  const currentTimeEpochMs = Date.now();
-
   await db.runP("BEGIN TRANSACTION");
 
   const statement = db.prepare(`
@@ -212,6 +222,75 @@ async function deleteUser(username, db) {
   await db.runP("END TRANSACTION");
 }
 
+async function deleteComment(comment_id, db) {
+  const commentId = Number(comment_id).toString();
+  if (commentId == null || commentId < 0) {
+    throw Error("Invalid comment id");
+  }
+
+  await db.runP("BEGIN TRANSACTION");
+
+  console.log(commentId);
+  const statement = db.prepare(`
+    DELETE FROM comment
+    WHERE id = ${commentId};
+  `);
+
+  statement.runP = promisify(statement.run);
+  statement.finalizeP = promisify(statement.finalize);
+  await statement.runP();
+  await statement.finalizeP();
+  await db.runP("END TRANSACTION");
+}
+
+async function getCommentInfo(comment_id, db) {
+  if (comment_id == null || comment_id < 0) {
+    throw Error("Invalid comment id");
+  }
+
+  const commentId = Number(comment_id).toString();
+
+  const commentInfo = await db.allP(`
+    SELECT 
+      comment.id AS comment_id,
+      comment.post_id AS comment_post_id
+    FROM 
+      comment
+    WHERE
+      comment.id = ${commentId};
+  `);
+
+  return commentInfo;
+}
+
+async function createNewComment(content, userId, postId, db) {
+  if (content == null || content.length == 0) {
+    throw Error("Invalid comment content");
+  }
+  if (userId == null || userId < 0) {
+    throw Error("Invalid user id");
+  }
+  if (postId == null || postId < 0) {
+    throw Error("Invalid post id");
+  }
+
+  const currentTimeEpochMs = Date.now();
+
+  await db.runP("BEGIN TRANSACTION");
+
+  const statement = db.prepare(`
+    INSERT INTO comment (content, creation_date, last_change_date, user_id, post_id) 
+    VALUES (?, ?, ?, ?, ?)
+  `);
+
+  statement.runP = promisify(statement.run);
+  statement.finalizeP = promisify(statement.finalize);
+
+  await statement.runP(content, currentTimeEpochMs, currentTimeEpochMs, userId, postId);
+  await statement.finalizeP();
+  await db.runP("END TRANSACTION");
+}
+
 export { getDb };
 export { getPosts };
 export { getUserInfo };
@@ -220,3 +299,7 @@ export { updateUsername };
 export { getPostInfo };
 export { createPost };
 export { deleteUser };
+export { deleteComment };
+export { getCommentInfo };
+export { createNewComment };
+export { getUserInfoById };
