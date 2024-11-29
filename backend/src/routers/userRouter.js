@@ -4,7 +4,7 @@ import { logger, logAffected, logErrorMessageToConsole } from "../logger.js";
 
 import { StatusCodes } from "http-status-codes";
 
-import { getUserInfo, createNewUser, updateUsername } from "../db.js";
+import { getUserInfo, createNewUser, updateUsername, deleteUser } from "../db.js";
 
 import { getDb } from "../db.js";
 const db = getDb();
@@ -115,6 +115,44 @@ userRouter.put("/user", async (req, res) => {
     res.send(newUserInfoCheck);
   } catch (error) {
     const genericErrorMessage = "Failed creating new user";
+    logErrorMessageToConsole(error, genericErrorMessage);
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(genericErrorMessage);
+  }
+});
+
+userRouter.delete("/user", async (req, res) => {
+  try {
+    logger.info("Requested: DELETE /user");
+
+    const parsedUrl = url.parse(req.url, true);
+    const query = parsedUrl ? parsedUrl.query : null;
+
+    if (query == null) {
+      throw Error("No param present in query string");
+    }
+
+    const username = query.username;
+    const userInfo = await getUserInfo(username, db);
+
+    if (userInfo.length == 0) {
+      logger.warn("User does not exist");
+      res.status(StatusCodes.CONFLICT).send("User does not exist");
+      return;
+    }
+
+    await deleteUser(username, db);
+
+    const userInfoCheck = await getUserInfo(username, db);
+
+    if (userInfoCheck.length != 0) {
+      logger.warn("Error during user deletion");
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).send("Error during user deletion");
+      return;
+    }
+
+    res.send("OK");
+  } catch (error) {
+    const genericErrorMessage = "Failed deleting user";
     logErrorMessageToConsole(error, genericErrorMessage);
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(genericErrorMessage);
   }

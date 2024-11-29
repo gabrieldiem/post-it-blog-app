@@ -107,7 +107,7 @@ async function insertUsers(db) {
 
 async function insertPosts(db) {
   const POSTS_CSV_PATH = `${dirname(__dirname)}/${DB_DIR_NAME}/posts.csv`;
-  const postsArray = await csvParser().fromFile(POSTS_CSV_PATH);
+  const postsArray = await csvParser({delimiter: ";"}).fromFile(POSTS_CSV_PATH);
 
   await db.runP("BEGIN TRANSACTION");
 

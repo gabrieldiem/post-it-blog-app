@@ -1,31 +1,360 @@
-title,content,attachment,creation_date,last_change_date,user_id
-Anna and the King of Siam,posuere cubilia curae duis faucibus accumsan odio curabitur convallis duis,NULL,1729559493000,1732051393000,18
-Two Little Boys,sem duis aliquam convallis nunc proin at turpis a pede posuere nonummy integer non velit donec diam neque vestibulum eget,NULL,1702888261000,1732051393000,27
-Crackerjack,donec odio justo sollicitudin ut suscipit a feugiat et eros vestibulum ac est lacinia nisi venenatis tristique fusce congue diam,NULL,1717676146000,1732051393000,3
-Special,erat curabitur gravida nisi at nibh in hac habitasse platea dictumst aliquam augue,NULL,1721939881000,1732051393000,6
-Mother Joan of the Angels (Matka Joanna od aniolów),ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae nulla dapibus dolor vel est donec odio justo,NULL,1715651429000,1732051393000,26
-Letter to Momo, A (Momo e no tegami)adipiscing lorem vitae mattis nibh ligula nec sem duis aliquam convallis nunc proin at,NULL,1730299302000,1732051393000,1
-No. 1 Ladies' Detective Agency, The nulla sed accumsan felis ut at dolor quis odio consequat varius integer ac leo pellentesque ultrices mattis odio donec vitae,NULL,1720764450000,1732051393000,6
-Machine, The eleifend donec ut dolor morbi vel lectus in quam fringilla rhoncus mauris,NULL,1730798273000,1732051393000,19
-Asylum,tellus nisi eu orci mauris lacinia sapien quis libero nullam sit amet turpis elementum ligula vehicula consequat,NULL,1727537172000,1732051393000,19
-Bugs Bunny's 3rd Movie: 1001 Rabbit Tales,hac habitasse platea dictumst morbi vestibulum velit id pretium iaculis diam erat fermentum justo nec condimentum neque sapien placerat,NULL,1723347271000,1732051393000,17
-Sicilian Clan, The (Clan des Siciliens Le) morbi sem mauris laoreet ut rhoncus aliquet pulvinar sed nisl nunc rhoncus dui vel sem sed sagittis nam congue,NULL,1724974085000,1732051393000,20
-Mighty Joe Young,ac consequat metus sapien ut nunc vestibulum ante ipsum primis,NULL,1702913362000,1732051393000,26
-Vivere,pede posuere nonummy integer non velit donec diam neque vestibulum eget vulputate ut ultrices vel augue vestibulum ante ipsum primis,NULL,1712712584000,1732051393000,15
-Chalk Garden, The aliquet maecenas leo odio condimentum id luctus nec molestie sed justo pellentesque viverra pede ac diam cras pellentesque volutpat,NULL,1706971009000,1732051393000,29
-Island, The egestas metus aenean fermentum donec ut mauris eget massa tempor convallis,NULL,1713202375000,1732051393000,22
-Land of Milk and Honey (Pays de cocagne),adipiscing lorem vitae mattis nibh ligula nec sem duis aliquam convallis nunc proin at turpis,NULL,1725439590000,1732051393000,23
-White Dwarf, The (Valkoinen kääpiö) orci vehicula condimentum curabitur in libero ut massa volutpat convallis morbi odio odio elementum eu,NULL,1705258723000,1732051393000,29
-Direct Action,integer pede justo lacinia eget tincidunt eget tempus vel pede morbi porttitor lorem id ligula suspendisse ornare consequat lectus in,NULL,1706153136000,1732051393000,2
-Phoenix,aliquam augue quam sollicitudin vitae consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum praesent blandit lacinia erat,NULL,1702433653000,1732051393000,14
-Lunch Break,nulla quisque arcu libero rutrum ac lobortis vel dapibus at diam nam tristique tortor,NULL,1729665643000,1732051393000,19
-Cabinet of Dr. Caligari, Das interdum venenatis turpis enim blandit mi in porttitor pede justo eu massa donec dapibus duis at velit,NULL,1720760698000,1732051393000,30
-Gay Purr-ee,vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae duis faucibus accumsan odio curabitur,NULL,1729721948000,1732051393000,2
-Crime Lords of Tokyo,nam ultrices libero non mattis pulvinar nulla pede ullamcorper augue a suscipit nulla elit ac nulla sed,NULL,1730371887000,1732051393000,10
-Life of Emile Zola, The maecenas tincidunt lacus at velit vivamus vel nulla eget eros,NULL,1713049223000,1732051393000,22
-Hellraiser: Bloodline,odio porttitor id consequat in consequat ut nulla sed accumsan felis ut at dolor,NULL,1701611270000,1732051393000,25
-Vinci,in faucibus orci luctus et ultrices posuere cubilia curae donec pharetra magna vestibulum aliquet ultrices erat,NULL,1713096932000,1732051393000,16
-Rose and Lucia (Lucía y el Roseo),ut ultrices vel augue vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae donec pharetra magna,NULL,1722954194000,1732051393000,25
-Revanche,justo nec condimentum neque sapien placerat ante nulla justo aliquam quis turpis eget,NULL,1707796952000,1732051393000,3
-Small Soldiers,eu interdum eu tincidunt in leo maecenas pulvinar lobortis est phasellus sit amet,NULL,1707094665000,1732051393000,12
-Guitar, The tempus semper est quam pharetra magna ac consequat metus sapien ut nunc vestibulum,NULL,1710930611000,1732051393000,22
+title;content;attachment;creation_date;last_change_date;user_id
+El Principito;"Edición oficial en tamaño bolsillo del clásico de la literatura universal, El Principito. Con las preciosas acuarelas del autor, este clásico de la literatura universal es imprescindible para niños y adultos.
+
+«Viví así, solo, sin nadie con quien hablar verdaderamente, hasta que tuve una avería en el desierto del Sahara, hace seis años. Algo se había roto en mi motor. Y como no tenía conmigo ni mecánico ni pasajeros, me dispuse a realizar, solo, una reparación difícil. Era, para mí, cuestión de vida o muerte. Tenía agua apenas para ocho días.
+
+La primera noche dormí sobre la arena a mil millas de todatierra habitada. Estaba más aislado que un náufrago sobre una balsa en medio del océano. Imaginaos, pues, mi sorpresa cuando, al romper el día, me despertó una extraña vocecita que decía:
+
+-Por favor..., ¡dibújame un cordero!
+
+-¿Eh!?
+
+-Dibújame un cordero...»";NULL;1729559493000;1732051393000;18
+El monje que vendió su Ferrari;"A través de sus páginas, conocemos la extraordinaria historia de Julian Mantle, un abogado de éxito que, tras sufrir un ataque al corazón, debe afrontar el gran vacío de su existencia. Inmerso en esta crisis existencial, Julian toma la radical decisión de vender todas sus pertenencias y viajar a la India. Es en un monasterio del Himalaya donde aprende las sabias y profundas lecciones de los monjes sobre la felicidad, el coraje, el equilibrio y la paz interior.
+
+Con esta historia tan especial e inolvidable, Robin Sharma nos enseña, paso a paso, una nueva manera de enfocar la vida personal, profesional y familiar. Nos muestra lo importante que es emprender un recorrido vital con una dirección clara, con pasión y armonía interior.";NULL;1702888261000;1732051393000;27
+"Anna Karénina (edición conmemorativa) ";"La historia de Anna Karénina, junto a la de Madame Bovary, es la del adulterio más célebre de la literatura. El enamoramiento de la protagonista, casada con el alto funcionario Karénin, por el atractivo militar Vronski y el estrepitoso romance que con él vive son el eje de una novela que es mucho más que la pulida tragedia de una caída en desgracia: es un esmerado y delicado retrato de todo un tiempo y un lugar, la vivisección de una sociedad en la que la felicidad de algunos convive con la desdicha de otros.";NULL;1717676146000;1732051393000;3
+"Reina roja (Antonia Scott 1) ";"Antonia Scott es especial. Muy especial.
+
+No es policía ni criminalista. Nunca ha empuñado un arma ni llevado una placa, y, sin embargo, ha resuelto decenas de crímenes.
+
+Pero hace un tiempo que Antonia no sale de su ático de Lavapiés. Las cosas que ha perdido le importan mucho más que las que esperan ahí fuera.
+
+Tampoco recibe visitas. Por eso no le gusta nada, nada, cuando escucha unos pasos desconocidos subiendo las escaleras hasta el último piso.
+
+Sea quien sea, Antonia está segura de que viene a buscarla.
+
+Y eso le gusta aún menos.";NULL;1721939881000;1732051393000;6
+"Sapiens. De animales a dioses ";"De la mano de uno de los historiadores más interesantes de la actualidad, he aquí la fascinante interpretación de Yuval Noah Harari sobre la historia de la humanidad. Bestseller nacional e internacional, este libro explora las formas en que la biología y la historia nos han definido y han mejorado nuestra comprensión de lo que significa ser «humano».
+
+Hace 70.000 años al menos seis especies de humanos habitaban la Tierra. Hoy solo queda una, la nuestra: Homo Sapiens. ¿Cómo logró imponerse en la lucha por la existencia? ¿Por qué nuestros ancestros recolectores se unieron para crear ciudades y reinos? ¿Cómo llegamos a creer en dioses, en naciones o en los derechos humanos, a confiar en el dinero, en los libros o en las leyes? ¿Cómo acabamos sometidos a la burocracia, a los horarios y al consumismo? ¿Y cómo será el mundo en los milenios venideros?
+
+En Sapiens, Yuval Noah Harari traza una breve historia de la humanidad, desde los primeros humanos que caminaron sobre la Tierra hasta los radicales y a veces devastadores avances de las tres grandes revoluciones que nuestra especie ha protagonizado: la cognitiva, la agrícola y la científica. A partir de hallazgos de disciplinas tan diversas como la biología, la antropología o la economía, Harari explora cómo las grandes corrientes de la historia han modelado nuestra sociedad, los animales y las plantas que nos rodean e incluso nuestras personalidades. ¿Hemos ganado en felicidad a medida que ha avanzado la historia? ¿Seremos capaces de liberar alguna vez nuestra conducta de la herencia del pasado? ¿Podemos hacer algo para influir en los siglos futuros?
+
+Audaz, ambicioso y provocador, este libro cuestiona todo lo que creíamos saber sobre el ser humano: nuestros orígenes, nuestras ideas, nuestras acciones, nuestro poder... y nuestro futuro.";NULL;1715651429000;1732051393000;26
+"El jardín olvidado ";"Un terrible secreto sale a la luz...
+
+En la noche de su veintiún cumpleaños, Nell O'Connor descubre que es adoptada, lo que cambiará su vida para siempre. Décadas más tarde, se embarca en una búsqueda de la verdad de sus antepasados que la lleva a la ventosa costa de Cornualles.
+
+Una misteriosa herencia que llega en el siglo XXI...
+
+A la muerte de Nell, su nieta Casandra recibe una inesperada herencia: una cabaña y su olvidado jardín en las tierras de Cornualles que es conocido por la gente por los secretos que estos esconden. Aquí es donde Casandra descubrirá finalmente la verdad sobre la familia y resolverá el misterio, que se remonta a un siglo atrás.
+
+La crítica ha dicho...
+«Memorias, intriga y secretos de familia entretejidos en un absorbente laberinto de tramas complementarias que nos arrastran a una lectura llena de fuerza, ternura y emoción. Con un estilo ágil y envolvente, Kate Morton nos conmueve con una magnífica historia difícil de olvidar.»
+María Dueñas
+
+«Kate Morton, [...] en la tradición de literatura clásica anglosajona, es el último fenómeno literario. [...] Atrapa a lectores con lazo por su manera de contar gustosa, minuciosa, victoriana.»
+El País Semanal
+
+«El jardín olvidado reúne todos los elementos de una auténtica novela romántica inglesa que tanto gusta a un tipo de lectores. [Presenta] claras evocaciones a Charles Dickens, Jane Austen o las hermanas Brönte.»
+La Vanguardia";NULL;1730299302000;1732051393000;1
+"Orgullo y prejuicio (edición conmemorativa) ";"A lo largo de una trama que discurre con gran ritmo y precisión, Jane Austen reúne una galería de personajes característicos de toda una época: la dama empeñada en casar a sus hijas con el mejor partido de la región, las hermanas que se debaten con sus vaivenes sentimentales, el clérigo adulador que peca de oportunista... El estudio de caracteres y el análisis de las relaciones humanas basadas en la costumbre, elementos esenciales de la narrativa de la autora, alcanzan en Orgullo y prejuicio cotas de maestría insuperable.
+
+La presente edición incluye una detallada cronología de la autora. Asimismo, recupera la introducción original en Penguin Clásicos de Tony Tanner, que desarrolló su carrera como catedrático de literatura inglesa y norteamericana en la Universidad de Cambridge, y cuyas agudas reflexiones sobre Jane Austen son la mejor guía para adentrarse en el universo literario de esta autora.";NULL;1720764450000;1732051393000;6
+"El nombre del viento (Crónica del asesino de reyes 1) ";"En una posada en tierra de nadie, un hombre se dispone a relatar, por primera vez, la auténtica historia de su vida. Una historia que únicamente él conoce y que ha quedado diluida tras los rumores, las conjeturas y los cuentos de taberna que le han convertido en un personaje legendario a quien todos daban ya por muerto: Kvothe... músico, mendigo, ladrón, estudiante, mago, héroe y asesino.
+
+Ahora va a revelar la verdad sobre sí mismo. Y para ello debe empezar por el principio: su infancia en una troupe de artistas itinerantes, los años malviviendo como un ladronzuelo en las calles de una gran ciudad y su llegada a una universidad donde esperaba encontrar todas las respuestas que había estado buscando.
+
+«Viajé, amé, perdí, confié y me traicionaron».
+
+«He robado princesas a reyes agónicos. Incendié la ciudad de Trebon. He pasado la noche con Felurian y he despertado vivo y cuerdo. Me expulsaron de la Universidad a una edad a la que a la mayoría todavía no los dejan entrar. He recorrido de noche caminos de los que otros no se atreven a hablar ni siquiera de día. He hablado con dioses, he amado a mujeres y he escrito canciones que hacen llorar a los bardos.
+
+«Me llamo Kvothe. Quizá hayas oído hablar de mí».
+
+La crítica ha dicho...
+«Una estupenda y fuera de lo común novela de aventuras fantásticas».
+Justo Navarro, El País
+
+«Sin duda El nombre del viento se convertirá en un clásico».
+The Times
+
+«Un libro para quien conoce el mágico poder de las palabras».
+Ricard Ruiz Garzón, El Periódico de Catalunya
+
+«Una aventura insólita y preciosa. Puntuación: Sobresaliente».
+Manu González, Qué Leer
+
+«No sucede a menudo, pero El nombre del viento de Patrick Rothfuss sí es tan bueno como dicen las reseñas».
+Locus";NULL;1730798273000;1732051393000;19
+"Harry Potter y la piedra filosofal (Harry Potter 1) ";"«Con las manos temblorosas, Harry le dio la vuelta al sobre y vio un sello de lacre púrpura con un escudo de armas: un león, un águila, un tejón y una serpiente, que rodeaban una gran letra H.»
+
+Harry Potter nunca ha oído hablar de Hogwarts hasta que empiezan a caer cartas en el felpudo del número 4 de Privet Drive. Llevan la dirección escrita con tinta verde en un sobre de pergamino amarillento con un sello de lacre púrpura, y sus horripilantes tíos se apresuran a confiscarlas. Más tarde, el día que Harry cumple once años, Rubeus Hagrid, un hombre gigantesco cuyos ojos brillan como escarabajos negros, irrumpe con una noticia extraordinaria: Harry Potter es un mago, y le han concedido una plaza en el Colegio Hogwarts de Magia y Hechicería. ¡Está a punto de comenzar una aventura increíble!";NULL;1727537172000;1732051393000;19
+"Invisible ";"¿Quién no ha deseado alguna vez ser invisible?
+
+¿Quién no ha deseado alguna vez dejar de serlo?
+
+El problema es que nunca he llegado a controlar bien ese poder:
+
+A veces, cuando más ganas tenía de ser invisible, era cuando más gente me veía, y en cambio, cuando deseaba que todos me vieran, era cuando a mi cuerpo le daba por desaparecer.
+
+Reseñas:
+«Un libro que nos muestra poco a poco las piezas de un puzle que nosotros, como lectores, debemos ordenar para obtener una visión completa de la historia que se está contando. Duro, real y necesario. Os lo recomiendo muchísimo.»
+IG El caos literario
+
+«Este libro te hace pensar y querer ser mejor persona.»
+IG Lioncourt
+
+«Un libro que me ha encantado. Una historia conmovedora, totalmente necesaria y que te llega al corazón.»
+IG Iris de Asomo
+
+Premios:
+Eloy Moreno, con su novela Invisible, es el ganador del I Premio Yoleo de lectura para jóvenes, otorgado por la Plataforma YOLEO.club, que promueve la lectura entre los más jóvenes.
+
+En los blogs...
+«Una novela desgarradoramente auténtica que se siente y se sufre a cada página. Recomendadísima, sin ningún límite de edad. Una novela que te abre los ojos a una realidad, que poco tiene de ficción.»
+Blog Érase un libro";NULL;1723347271000;1732051393000;17
+"El mundo amarillo ";"«El mundo amarillo es un mundo fantástico que quiero compartir contigo. Es el mundo de los descubrimientos que hice durante los diez años que estuve enfermo de cáncer. Es curioso, pero la fuerza, la vitalidad y los hallazgos que haces cuando estás enfermo sirven también cuando estás bien, en el día a día.
+
+»Este libro pretende que conozcas y entres en este mundo especial y diferente, pero, sobre todo, que descubras a los ""amarillos"". Ellos son el nuevo escalafón de la amistad, esas personas que no son ni amantes ni amigos, esa gente que se cruza en tu vida y que con una sola conversación puede llegar a cambiártela. No te adelanto más: tendrás que leer este libro para poder empezar a encontrar tus ""amarillos"". Quizás uno de ellos sea yo...
+
+»El mundo amarillo habla de lo sencillo que es creer en los sueños para que estos se creen. Y es que el creer y el crear están tan sólo a una letra de distancia.
+
+«¿Qué esperas a saber quiénes son tus ""amarillos""?»
+Albert Espinosa
+
+Reseña:
+«Albert habla de un mundo al alcance de todos, y que tiene el color del Sol: el mundo amarillo. Un sitio cálido donde los besos pueden durar diez minutos, donde los desconocidos pueden ser tus mejores aliados, donde el miedo pierde su significado, donde la muerte no es eso que les pasa sólo a los demás y la vida es lo más valioso. Este libro habla de todo esto, de todo lo que sentimos y no decimos, del miedo a que nos quiten lo que tenemos, de reconocernos enteramente y apreciar quiénes somos cada segundo del día. ¡Larga vida a Albert!»";NULL;1724974085000;1732051393000;20
+"1984 (edición definitiva avalada por The Orwell Estate) ";En el año 1984 Londres es una ciudad lúgubre en la que la Policía del Pensamiento controla de forma asfixiante la vida de los ciudadanos. Winston Smith es un peón de este engranaje perverso y su cometido es reescribir la historia para adaptarla a lo que el Partido considera la versión oficial de los hechos. Hasta que decide replantearse la verdad del sistema que los gobierna y somete. En el año 1984 Londres es una ciudad lúgubre en la que la Policía del Pensamiento controla de forma asfixiante la vida de los ciudadanos. Winston Smith es un peón de este engranaje perverso y su cometido es reescribir la historia para adaptarla a lo que el Partido considera la versión oficial de los hechos. Hasta que decide replantearse la verdad del sistema que los gobierna y somete.;NULL;1702913362000;1732051393000;26
+La verdad sobre el caso Harry Quebert;"Quién mató a Nola Kellergan es la gran incógnita a desvelar en esta incomparable historia policíaca cuya experiencia de lectura escapa a cualquier tentativa de descripción.
+
+Intentémoslo:
+
+Una novela de suspense a tres tiempos -1975, 1998 y 2008- acerca del asesinato de una joven de quince años en la pequeña ciudad de Aurora, en New Hampshire.
+
+En 2008, Marcus Goldman, un joven escritor, visita a su mentor -Harry Quebert, autor de una aclamada novela- y descubre que éste tuvo una relación secreta con Nola Kellergan. Poco después, Harry es arrestado y acusado de asesinato al encontrarse el cadáver de Nola enterrado en su jardín.
+
+Marcus comienza a investigar y a escribir un libro sobre el caso. Mientras busca demostrar la inocencia de Harry, una trama de secretos sale a la luz. La verdad solo llega al final de un largo, intrincado y apasionante recorrido.
+
+El mejor libro del año para los lectores de El País.
+Número 1 en ventas en Francia.
+Derechos de traducción vendidos a 33 idiomas.
+
+La crítica ha dicho...
+«El furor despertado por el jovencísimo Dicker y su magistral novela es un furor real, porque estamos ante el gran thriller que todo el mundo esperaba desde Millenium de Larsson, ante una voz napoleónica, que no escribe, boxea».
+Laura Fernández, El Cultural de El Mundo
+
+«Hay algo fantástico en la precisión cinematográfica con que el narrador, el joven Markus Goldman, transcribe lo que ocurrió hace 33 años... La novela de Joël Dicker pertenece a ese tipo de literatura que genera literatura, es decir, que invita a continuar inventando novelas».
+Justo Navarro, Babelia";NULL;1712712584000;1732051393000;15
+"Dispara, yo ya estoy muerto ";"Hay momentos en la vida en los que la única manera de salvarse a uno mismo es muriendo o matando.
+
+A finales del siglo XIX, durante la última etapa zarista, los Zucker, perseguidos por su condición de judíos, tienen que abandonar Rusia huyendo del horror y la sinrazón. A su llegada a la Tierra Prometida, Samuel Zucker adquiere las tierras de los Ziad, una familia árabe encabezada por Ahmed. Entre él y Samuel nace un fuerte vínculo, una sólida amistad que, por encima de las diferencias religiosas y políticas, se mantiene generación tras generación.
+
+Con las amenazas, la sed de venganza y muchas pasiones desatadas como telón de fondo, las vidas entrecruzadas de los Zucker y los Ziad conforman un mosaico de traiciones y sufrimientos, de amores posibles e imposibles, al tiempo que plasman la gran aventura de vivir y convivir en un territorio marcado por la intolerancia.
+
+Intensa y conmovedora crónica de dos sagas familiares, esta novela de Julia Navarro nos adentra en las vidas de personas con nombres y apellidos, que luchan por alcanzar sus sueños y que son responsables de su propio destino.
+
+«Los personajes de esta novela viven conmigo, me han enseñado mucho, forman parte ya de mi historia personal.»
+Julia Navarro
+
+La crítica ha dicho...
+«La novela más compleja de Julia Navarro. Casi mil páginas que mezclan historia y suspense, drama y política. Una obra decimonónica en pleno siglo XXI.»
+J. M. Pozuelo Yvancos, ABC Cultural
+
+«Una novela de personajes, unas criaturas en gran medida presas de su época y de los vaivenes históricos de ésta. Un relato ambicioso que se inicia a finales del siglo XIX y llega hasta 1948 recorriendo algunos de los sucesos más importantes de la historia contemporánea.»
+AreaLibros";NULL;1706971009000;1732051393000;29
+"El invierno del mundo (The Century 2) ";"Segundo volumen de la trilogía «The Century»
+
+En el año 1933, Berlín es un foco de agitación política y social. Lady Maud, ahora la esposa de Walter von Ulrich y madre de dos hijos, publica en una revista semanal artículos que ridiculizan al Partido Nazi, mientras que Walter manifiesta su oposición en el Parlamento. Sin embargo, parece que nada podrá frenar el poder ascendente del canciller Adolf Hitler. Cuando Ethel Williams y su hijo Lloyd visitan a la familia von Ulrich, todos serán testigos de la tiranía y la represión de la nueva Alemania.
+
+El dominio del Tercer Reich se extenderá hasta Francia y más allá de la frontera rusa. Mientras, en Inglaterra, Lloyd Williams, activista político como su madre, luchará en el ejército británico para intentar frenar el avance de los nazis y se alistará en las brigadas internacionales durante la guerra civil española. Participará en la ofensiva de Zaragoza y la batalla de Belchite.
+
+En Ty Gwyn, la mansión familia de los Fitzherbert en Gales, se alojarán los oficiales británicos y, durante su estancia, el teniente Lloyd Williams se sentirá atraído por la mujer de Boy Fitzherbert, la rica heredera americana Daisy Peshkov.
+
+«La trilogía ""The Century"" es la historia de mis abuelos y de los vuestros, de nuestros padres y de nuestras propias vidas. De alguna forma es la historia de todos nosotros.»
+Ken Follett
+
+La crítica ha dicho...
+«La saga atrapa y la intensidad de los personajes te sumerge en el relato. Un trabajo de plena coherencia, cohesión y pulcritud.»
+Ramón Ventura, El Periódico de Catalunya";NULL;1713202375000;1732051393000;22
+"El abuelo que saltó por la ventana y se largó ";"Momentos antes de que empiece la pomposa celebración de su centésimo cumpleaños, Allan Karlsson decide que nada de eso va con él. Vestido con su mejor traje y unas pantuflas, se encarama a una ventana y se fuga de la residencia donde vive, dejando plantados al alcalde y a la prensa local.
+
+Sin saber adónde ir, se encamina a la estación de autobuses, el único sitio donde es posible pasar desapercibido. Allí, mientras espera la llegada del primer autocar que se presente, un joven le pide que vigile su maleta, con la mala fortuna de que el bus llega antes de que el joven regrese y Allan, sin pensarlo dos veces, se sube con la maleta, ignorante de que en su interior se apilan, ¡santo cielo!, millones de coronas en efectivo. Pero Allan no es una persona fácil de amilanar. A lo largo de su centenaria vida ha tenido un montón de experiencias de lo más singulares: desde inverosímiles encuentros con personajes como Franco, Stalin y Churchill, hasta amistades comprometedoras como la esposa de Mao, pasando por actividades de alto riesgo como ser agente de la CIA o ayudar a Oppenheimer a crear la bomba atómica.
+
+Sin embargo, esta vez, en su enésima aventura, cuando creía que con su jubilación había llegado la tranquilidad, está a punto de poner todo el país patas arriba.
+
+La crítica ha dicho...
+«El viejo canalla de Allan Karlsson es uno de los mejores héroes que nos hemos encontrado en mucho tiempo.»
+Libres Hebdo
+
+«Magnífico humor, sátira social, ironía y una sensación de tremendo bienestar describen el debut de Jonas Jonasson, que nos ofrece todo el siglo XX para que nos riamos de él.»
+BTJ-häftet
+
+«Con esta odisea de un abuelo subversivo que ha atravesado las grandes tragedias del siglo XX, Suecia revela un nuevo gusto por la ironía, un humorismo paradójico [...]»
+La Repubblica ";NULL;1725439590000;1732051393000;23
+"Línea de fuego ";"«Es lo malo de estas guerras. Que oyes al enemigo llamar a su madre en el mismo idioma que tú».
+
+Durante la noche del 24 al 25 de julio de 1938, la XI Brigada Mixta del ejército de la República cruza el río para establecer una cabeza de puente en Castellets del Segre. En las inmediaciones del pueblo, medio batallón de infantería, un tabor marroquí y una compañía de la Legión defienden la zona. Está a punto de comenzar la batalla del Ebro, la más cruda y sangrienta que se libró nunca en suelo español.
+
+Combinando de forma magistral la ficción con datos históricos y testimonios personales, Arturo Pérez-Reverte sitúa al lector, con sobrecogedor realismo, entre quienes, voluntarios o a la fuerza, lucharon en los frentes de batalla de la Guerra Civil. Sus nombres no son los que recuerda la Historia, pero cuanto les sucedió resuena en estas páginas con el dramatismo de una memoria que nos pertenece a todos.
+
+Ésta no es una novela sobre la Guerra Civil, sino sobre los hombres y mujeres que combatieron en ella. La historia de los padres y abuelos de numerosos españoles de hoy.
+
+La crítica ha dicho:
+«La novela definitiva sobre la Guerra Civil española. [Un] proyecto literario inmenso, envolvente y, pese a la crudeza del relato, poderosamente fascinante por la trascendencia del momento en que nos sumerge».
+Sergio Vila-Sanjuán, Cultura/s de La Vanguardia
+
+«Un libro asombroso, durísimo y brillante. Todo está ahí, todo en esas páginas escritas con un pulso y una habilidad endiabladas. Un libro para leer, para meditar y al que hay que volver. Línea de fuego es una obra maestra, una catedral literaria y la mejor novela de Arturo Pérez-Reverte».
+Juan Gómez-Jurado, El Correo
+
+«680 páginas hipnóticas, intensas en emoción y humanidad».
+Javier Ors, La Razón";NULL;1705258723000;1732051393000;29
+Un cuento perfecto;"- Érase una vez una mujer que lo tenía todo y un chico que no tenía nada.
+
+- Érase una vez una historia de amor entre el éxito y la duda.
+
+- Érase una vez un cuento perfecto.
+
+Elísabet Benavent, @BetaCoqueta, vuelve al panorama de la literatura con una novela que explora el significado del éxito en la vida y reflexiona con ironía y humor acerca de las imposiciones sociales, la presión del grupo y la autoexigencia que, aunque cueste creerlo, no es sinónimo de felicidad.
+
+Los lectores han dicho...
+«¡Un libro magnífico. Adictivo! Una historia real, bien escrita. He reído, llorado, suspirado. Elísabet, he leído todos tus libros y, aunque parezca imposible, sigues sorprendiéndome».
+
+«Una historia madura que nos hace reflexionar. No es una novela al uso centrada en el amor de pareja, es eso y mucho más».
+
+«Leer a Elísabet es entrar en la historia, sentirla y vivirla. Su pluma te atrapa».
+
+«Te puede gustar un libro más que otro. Amar a un personaje y odiar a otros... pero siempre tienen algo que te marca y que se queda incrustado en el corazón. ¡Gracias, BetaCoqueta!».";NULL;1706153136000;1732051393000;2
+"Una columna de fuego (Saga Los pilares de la Tierra 3) ";"Una columna de fuego arranca cuando el joven Ned Willard regresa a su hogar en Kingsbridge por Navidad. Corre el año 1558, un año que trastocará la vida de Ned y que cambiará Europa para siempre.
+
+Las antiguas piedras de la catedral de Kingsbridge contemplan una ciudad dividida por el odio religioso. Los principios elevados chocan con la amistad, la lealtad y el amor, y provocan derramamientos de sangre. Ned se encuentra de pronto en el bando contrario al de la muchacha con quien anhela casarse, Margery Fitzgerald.
+
+Cuando Isabel I llega al trono, toda Europa se vuelve en contra de Inglaterra. La joven monarca, astuta y decidida, organiza el primer servicio secreto del país para estar avisada ante cualquier indicio de intrigas homicidas, levantamientos o planes de invasión.
+
+En París, a la espera, se encuentra la seductora y obstinada María Estuardo, reina de los escoceses, en el seno de una familia francesa con una ambición descomunal. Proclamada legítima soberana de Inglaterra, María cuenta con sus propios partidarios, que conspiran para deshacerse de Isabel.
+
+Entretanto, Ned Willard busca a Jean Langlais, un personaje escurridizo y enigmático, sin saber que tras ese nombre falso se esconde un compañero de clase de su infancia, alguien que lo conoce demasiado bien.
+
+A lo largo de medio siglo turbulento, el amor entre Ned y Margery parece condenado al fracaso mientras el extremismo hace estallar la violencia desde Edimburgo hasta Ginebra. Isabel se aferra precariamente a su trono y a sus principios, protegida por un pequeño y entregado grupo de espías hábiles y agentes secretos valerosos.
+
+Los auténticos enemigos, tanto entonces como ahora, no son las religiones rivales. La verdadera batalla es la que enfrenta a quienes creen en la tolerancia y el acuerdo contra tiranos dispuestos a imponer sus ideas a todo el mundo... y a cualquier precio.
+
+Descubre la Saga Los pilares de la tierra:
+
+Las tinieblas y el alba
+
+Los pilares de la tierra
+
+Un mundo sin fin
+
+Una columna de fuego
+
+Reseñas...
+«Lo he leído en un fin de semana largo, me lo he pasado como un enano y sigo envidiando como el primer día la capacidad de Follett para entretener. Sus tramas funcionan siempre y te mantiene pegado a cada página.»
+Juan Gómez Jurado, ABC";NULL;1702433653000;1732051393000;14
+"La isla del tesoro ";"Jim Hawkins regenta, junto a sus padres, la posada Almirante Benbow. Su vida discurre tranquila entre la barra y las mesas hasta que, un día, un viejo marinero entra en su fonda acarreando un pesado secreto... De la noche a la mañana el joven Jim se encuentra en la cubierta de la Hispaniola, rodeado de rudos marineros, agasajado por un misterioso cocinero cojo, ansiosos todos ellos por encontrar el codiciado tesoro del capitán Flint.";NULL;1729665643000;1732051393000;19
+"El día que se perdió la cordura ";"Centro de Boston, 24 de diciembre, un hombre camina desnudo con la cabeza decapitada de una joven. El doctor Jenkins, director del centro psiquiátrico de la ciudad, y Stella Hyden, agente de perfiles del FBI, se adentrarán en una investigación que pondrá en juego sus vidas, su concepción de la cordura y que los llevará hasta unos sucesos fortuitos ocurridos en el misterioso pueblo de Salt Lake diecisiete años atrás.
+
+Con un estilo ágil lleno de referencias literarias -García Márquez, Auster, Orwell o Stephen King- e imágenes impactantes, Javier Castillo construye un thriller romántico narrado a tres tiempos que explora los límites del ser humano y rompe los esquemas del género de suspense.
+
+Reseñas:
+«Una historia trepidante que mantiene al lector con el corazón en vilo... Adrenalina pura.»
+El Mundo
+
+«Un thriller frenético y minuciosamente armado.»
+Eldiario.es
+
+«Una hoja. Dos páginas de El día que se perdió la cordura tan solo para quedar atrapado en sus garras.»
+ABC
+
+«Castillo ha sabido dar en el centro de la diana editorial con un thriller atractivo y trepidante que se ambienta en Estados Unidos y que parte de una imagen poderosa.»
+Diario Sur";NULL;1720760698000;1732051393000;30
+"En el país de la nube blanca (Trilogía de la Nube Blanca 1) ";"Londres, 1852: dos chicas emprenden la travesía en barco hacia Nueva Zelanda. Para ellas significa el comienzo de una nueva vida como futuras esposas de unos hombres a quienes no conocen. Gwyneira, de origen noble, está prometida al hijo de un magnate de la lana, mientras que Helen, institutriz de profesión, ha respondido a la solicitud de matrimonio de un granjero.";NULL;1729721948000;1732051393000;2
+"Frankenstein o el moderno Prometeo ";"En el verano de 1816, el poeta Percy B. Shelley y su esposa Mary se reunieron con Lord Byron y su médico en una villa a orillas del lago Leman. A instancias de Lord Byron y para animar una velada tormentosa, decidieron que cada uno inventaría una historia de fantasmas. La más callada y reservada, Mary Shelley, dio vida así a quien sería su personaje más famoso: el doctor Frankenstein. Al cabo de un año completaría la novela.
+
+La historia es de todos conocida: un científico decide crear una criatura con vida propia a la que luego rechaza. Metáfora sobre la vida, la libertad y el amor, Frankenstein o el moderno Prometeo es una maravillosa fábula con todos los ingredientes de los grandes mitos, un gran clásico que ahora recuperamos con una nueva traducción y precedido de un espléndido estudio de Alberto Manguel sobre la influencia del mito en el imaginario del cine.";NULL;1730371887000;1732051393000;10
+Los herederos de la tierra (La catedral del mar 2);"Una espléndida y emocionante novela de lealtad, venganza, amor y sueños por cumplir.
+
+Barcelona, 1387. Las campanas de la iglesia de Santa María de la Mar siguen sonando para todos los habitantes del barrio de la Ribera, pero uno de ellos escucha su repique con especial atención... Hugo Llor, hijo de un marinero fallecido, a sus doce años trabaja en las atarazanas gracias a la generosidad de uno de los prohombres más apreciados de la ciudad: Arnau Estanyol.
+
+Pero sus sueños juveniles de convertirse en constructor de barcos se darán de bruces contra una realidad dura y despiadada cuando la familia Puig, enemiga acérrima de su mentor, aproveche su posición ante el nuevo rey para ejecutar una venganza que llevaba años acariciando.
+
+A partir de ese momento, la vida de Hugo oscila entre su lealtad a Bernat, amigo y único hijo de Arnau, y la necesidad de sobrevivir en una ciudad injusta con los pobres. Obligado a abandonar el barrio de la Ribera, busca trabajo junto a Mahir, un judío que le enseña los secretos del mundo del vino. Con él, entre viñedos, cubas y alambiques, el muchacho descubre la pasión por la tierra al tiempo que conoce a Dolça, la hermosa sobrina del judío, que se convertirá en su primer amor. Este sentimiento, prohibido por las costumbres y por la religión, será el que le proporcionará los momentos más dulces y amargos de su juventud.
+
+Tras el éxito arrollador de La catedral del mar, Ildefonso Falcones regresa a ese mundo que tan bien conoce, la Barcelona medieval. Y lo hace recreando una vez más a la perfección esa efervescente sociedad feudal, prisionera de una nobleza voluble y corrupta, y la lucha de un hombre por salir adelante sin sacrificar su dignidad.
+
+La crítica ha dicho...
+
+
+«Decía Kipling que la artesanía está siempre en la base de todo gran arte. Tal apreciación nos ha rondado mientras leíamos la caudalosa (y muy trabajada) segunda parte de La catedral del mar. [...] Una buena novela histórica que logra sumergir al lector en atmósferas del pasado. [...] Una secuela a la altura de su obra matriz.»
+Carles Barba, Cultura/s, La Vanguardia";NULL;1713049223000;1732051393000;22
+"Padre Rico, padre Pobre (edición actualizada) ";"Padre rico, padre pobre te ayudará a...
+... derribar el mito de que necesitas tener ingresos elevados para hacerte rico.
+... desafiar la creencia de que tu casa es una inversión.
+... demostrar a los padres por qué no deben confiar en el sistema escolar para que sus hijos aprendan a manejar el dinero.
+... definir de una vez y para siempre qué es una inversión, y qué es una obligación.
+... saber qué debes enseñar a tus hijos sobre el dinero para que tengan éxito financiero en el futuro.
+
+Robert T. Kiyosaki ha transformado radicalmente la forma en que millones de personas alrededor del mundo perciben el concepto del dinero. Con perspectivas que contradicen el conocimiento convencional, Robert, también conocido como el «maestro» millonario, se ha ganado una gran reputación por hablar claro, ser irreverente y tener valor. Es reconocido en todo el mundo como un defensor apasionado de la educación financiera.
+
+Reseña:
+«Padre rico, padre pobre es el punto de partida para quien quiera tomar el control de su futuro financiero.»
+USA Today";NULL;1701611270000;1732051393000;25
+"Las gafas de la felicidad (edición actualizada) ";"Rafael Santandreu es uno de los psicólogos más prestigiosos de España. Está especializado en ayudar a las personas a desarrollar su fortaleza emocional. A través de su método, miles de personas han conseguido perder sus miedos de forma permanente.
+
+«Este libro pretende convertirte en una persona mucho más fuerte y feliz. Aglutina todos los mecanismos que conoce la psicología moderna para transformarnos. Personalmente no soy fan de los libros de autoayuda, excepto de aquellos basados en la evidencia. Aquí te ofrezco solo herramientas de comprobada eficacia y te aseguro que el 80% de los pacientes que han seguido mi combinación terapéutica han dejado completamente atrás la depresión, la ansiedad, las obsesiones y los miedos exagerados.»
+Rafael Santandreu
+
+Ahora te toca a ti descubrir las lentes que te enseñarán a graduar tu corazón y tu mente.
+
+¡Ponte las gafas de la felicidad!
+
+La crítica ha dicho...
+«Lean este libro, por favor. Se lo recomienda un médico que percibe el stress actual a través de los poros de la gente.»
+Santiago Dexeus, médico
+
+«Sencillamente magnífico. Esta filosofía realmente ayuda a mejorar como persona.»
+David Ferrer, tenista profesional
+
+«El psicólogo Rafael Santandreu aporta, con Las gafas de la felicidad, una herramienta con la que cambiar la perspectiva del día a día.»
+Diario de Burgos
+
+«Un método práctico, accesible, comprobado y exitoso para aprender a superar con éxito los problemas y los complejos más comunes que pueden llegar a limitar seriamente nuestras vidas.»
+Expansión
+
+«Una obra que, con lenguaje claro, habla de superar complejos, bajarse la ansiedad, perder el miedo al dolor, apreciar las delicias de la soledad, convertir la vida en algo muy interesante...»
+Las provincias";NULL;1713096932000;1732051393000;16
+"Roma soy yo (Serie Julio César 1) ";"Si alguna vez hubo un hombre nacido para cambiar el curso de la Historia, ese fue Julio César. Su leyenda, veinte siglos después, sigue más viva que nunca.
+
+Roma, año 77 a.C. El cruel senador Dolabela va a ser juzgado por corrupción, pero ha contratado a los mejores abogados, ha comprado al jurado y, además, es conocido por usar la violencia contra todos los que se enfrentan a él. Nadie se atreve a ser el fiscal, hasta que de pronto, contra todo pronóstico, un joven patricio de tan solo veintitrés años acepta llevar la acusación, defender al pueblo de Roma y desafiar el poder de las élites. El nombre del desconocido abogado es Cayo Julio César.
+
+Combinando con maestría un exhaustivo rigor histórico y una capacidad narrativa extraordinaria, Santiago Posteguillo logra sumergir al lector en el fragor de las batallas, hacerle caminar por las calles más peligrosas mientras los sicarios de los senadores acechan en cualquier esquina, vivir la gran historia de amor de Julio César con Cornelia, su primera esposa, y comprender, en definitiva, cómo fueron los orígenes del hombre tras el mito.
+
+Hay personajes que cambian la historia del mundo, pero también hay momentos que cambian la vida de esos personajes. Roma soy yo es el relato de los extraordinarios sucesos que marcaron el destino de César.";NULL;1722954194000;1732051393000;25
+"La villa de las telas (La villa de las telas 1) ";"Una mansión.
+Una poderosa familia.
+Un oscuro secreto.
+
+El destino de una familia en tiempos convulsos y un amor que todo lo vence.
+
+Augsburgo, 1913. La joven Marie entra a trabajar en la cocina de la impresionante villa de los Melzer, una rica familia dedicada a la industria textil. Mientras Marie, una pobre chica proveniente de un orfanato, lucha por abrirse paso entre los criados, los Melzer esperan con ansia el comienzo de la nueva temporada invernal de baile, momento en el que se presentará en sociedad la bella Katharina. Solo Paul, el heredero, permanece ajeno al bullicio, pues prefiere su vida de estudiante en Múnich. Hasta que conoce a Marie...
+
+Reseñas:
+«Es una gran historia de amor, con tintes dramáticos y secretos familiares, que nos ha gustado tanto por su calidad literaria como por su preciosismo histórico».
+Revista Kritica
+
+«Amor imposible y las rígidas normas sociales de la Europa central a principios del siglo XX serán el escenario en el que se desenvuelva esta entretenida historia llena de secretos».
+Jorge Pato García, El Imparcial
+
+«Downtown Abbey en Augsburgo».
+Histo-couch
+
+«La villa de las telas es el primer volumen de una emocionante saga sobre una dinastía familiar con fábricas textiles. ¡Os lo recomiendo!»
+Franken Aktuell
+
+«Con su escritura fluida, Anne Jacobs sabe cómo seducir a sus lectoras y transportarlas a la vida de la alta sociedad de hace cien años con todo su glamour pero también con sus sombras».
+Weilheimer Tagblatt";NULL;1707796952000;1732051393000;3
+"Un mundo feliz ";"Los peores vaticinios del capitalismo se han cumplido: triunfan los dioses del consumo y la comodidad, y el orbe se divide en diez zonas en apariencia seguras y estables. Los humanos ya no procrean, el sexo se ha convertido solo en una diversión y las letras del alfabeto griego se han pervertido para clasificar a los seres humanos por castas. Todos aceptan su lugar en la nueva jerarquía social, perfectamente ordenada. Los valores humanos esenciales no tienen cabida en este mundo y los habitantes se crean in vitro con una técnica concebida a imagen y semejanza de una cadena de montaje. El soma, la droga por excelencia en este mundo distópico que propone Huxley, ayuda a los habitantes a escapar de la rutina. A cambio de este orden pulcro, la libertad de expresión y el pensamiento crítico han sido erradicados. Bernard Marx, el protagonista de la novela, inconformista e inteligente, deberá probar los límites de la sociedad que lo ha engendrado, iniciando un viaje más allá de las fronteras distópicas de su universo.
+
+La crítica ha dicho:
+«Según los ojos con que se mire, Un mundo feliz retrata una utopía perfecta o su horrendo opuesto, una distopía: sus hermosos habitantes viven seguros y libres de enfermedades y preocupaciones, pero lo hacen de un modo que, queremos creer, sería inaceptable para nosotros.»
+Margaret Atwood
+
+«Aldous Huxley fue un hombre extraordinariamente profético, no hay otro novelista en el siglo XX que haya escrito una guía más sagaz del futuro.»
+J.G. Ballard";NULL;1707094665000;1732051393000;12
+"Cien años de soledad ";"«Muchos años después, frente al pelotón de fusilamiento, el coronel Aureliano Buendía había de recordar aquella tarde remota en que su padre lo llevó a conocer el hielo. Macondo era entonces una aldea de veinte casas de barro y cañabrava construidas a la orilla de un río de aguas diáfanas que se precipitaban por un lecho de piedras pulidas, blancas y enormes como huevos prehistóricos. El mundo era tan reciente, que muchas cosas carecían de nombre, y para mencionarlas había que señalarlas con el dedo».
+
+Con estas palabras empieza la novela ya legendaria en los anales de la literatura universal, una de las aventuras literarias más fascinantes de nuestro siglo. Millones de ejemplares de Cien años de soledad leídos en todas las lenguas y el Premio Nobel de Literatura coronando una obra que se había abierto paso «boca a boca» -como gusta decir al escritor- son la más palpable demostración de que la aventura fabulosa de la familia Buendía-Iguarán, con sus milagros, fantasías, obsesiones, tragedias, incestos, adulterios, rebeldías, descubrimientos y condenas, representaba al mismo tiempo el mito y la historia, la tragedia y el amor del mundo entero.
+
+Pablo Neruda dijo...
+«El Quijote de nuestro tiempo.»";NULL;1710930611000;1732051393000;22

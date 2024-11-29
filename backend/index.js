@@ -12,7 +12,7 @@ import rootRouter from "./src/routers/rootRouter.js";
 import userRouter from "./src/routers/userRouter.js";
 import postRouter from "./src/routers/postRouter.js";
 
-const PORT = process.env.PORT;
+const PORT = process.env.BLOG_APP_BACKEND_PORT;
 
 const app = express();
 app.use(cors());

@@ -191,6 +191,27 @@ async function  createPost(title, content, userInfo, db) {
   await db.runP("END TRANSACTION");
 }
 
+async function deleteUser(username, db) {
+  if (username == null || username.length == 0 || username.length > MAX_USERNAME) {
+    throw Error("Invalid username");
+  }
+
+  const currentTimeEpochMs = Date.now();
+
+  await db.runP("BEGIN TRANSACTION");
+
+  const statement = db.prepare(`
+    DELETE FROM user
+    WHERE name = "${username}"
+  `);
+
+  statement.runP = promisify(statement.run);
+  statement.finalizeP = promisify(statement.finalize);
+  await statement.runP();
+  await statement.finalizeP();
+  await db.runP("END TRANSACTION");
+}
+
 export { getDb };
 export { getPosts };
 export { getUserInfo };
@@ -198,3 +219,4 @@ export { createNewUser };
 export { updateUsername };
 export { getPostInfo };
 export { createPost };
+export { deleteUser };
