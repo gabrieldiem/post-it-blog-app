@@ -253,7 +253,8 @@ async function getCommentInfo(comment_id, db) {
   const commentInfo = await db.allP(`
     SELECT 
       comment.id AS comment_id,
-      comment.post_id AS comment_post_id
+      comment.post_id AS comment_post_id,
+      comment.user_id AS comment_user_id
     FROM 
       comment
     WHERE
@@ -291,6 +292,35 @@ async function createNewComment(content, userId, postId, db) {
   await db.runP("END TRANSACTION");
 }
 
+async function updateComment(content, userId, commentId, db) {
+  if (content == null || content.length == 0) {
+    throw Error("Invalid comment content");
+  }
+  if (userId == null || userId < 0) {
+    throw Error("Invalid user id");
+  }
+  if (commentId == null || commentId < 0) {
+    throw Error("Invalid comment id");
+  }
+
+  const currentTimeEpochMs = Date.now();
+
+  await db.runP("BEGIN TRANSACTION");
+
+  const statement = db.prepare(`
+    UPDATE comment
+    SET content = ?, last_change_date = ?
+    WHERE id = ?;
+  `);
+
+  statement.runP = promisify(statement.run);
+  statement.finalizeP = promisify(statement.finalize);
+
+  await statement.runP(content, currentTimeEpochMs, commentId);
+  await statement.finalizeP();
+  await db.runP("END TRANSACTION");
+}
+
 export { getDb };
 export { getPosts };
 export { getUserInfo };
@@ -303,3 +333,4 @@ export { deleteComment };
 export { getCommentInfo };
 export { createNewComment };
 export { getUserInfoById };
+export { updateComment };
