@@ -6,16 +6,18 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
 import { CLIENT_URLS } from "../services/globals";
 import GenericDialog from "./GenericDialog";
-import { deleteComment } from "../services/comment.js";
+import { deleteComment, updateComment } from "../services/comment.js";
 import { timeAgoFormatter } from "../services/globals";
+import EditComment from "./EditComment.jsx";
 
 const COLOR = "#282828";
 const paddingSides = "30px";
 
-const Comment = ({ userState, comment, setPost }) => {
+const Comment = ({ userState, comment, setPost, postId, refresh }) => {
   const [isUser, setIsUser] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const [checkIsUser, setCheckIsUser] = useState(false);
+  const [editMode, setEditMode] = useState(false);
   const timeCreated = timeAgoFormatter.format(new Date(comment.creation_date));
   const timeEdited = timeAgoFormatter.format(new Date(comment.last_change_date));
   const isEdited = comment.creation_date != comment.last_change_date ? `, editado ${timeEdited}` : "";
@@ -39,7 +41,9 @@ const Comment = ({ userState, comment, setPost }) => {
     }
   };
 
-  const editCommentHandler = () => {};
+  const switchToEditMode = async () => {
+    setEditMode(true);
+  };
 
   useEffect(() => {
     if (userState && userState.user && userState.user.id === comment.user_id) {
@@ -48,8 +52,60 @@ const Comment = ({ userState, comment, setPost }) => {
         setCheckIsUser(false);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userState, checkIsUser, comment]);
+
+  const CommentReadMode = (
+    <Card
+      sx={{
+        maxWidth: "70rem",
+        minWidth: "15rem",
+        margin: "0.25rem auto",
+        backgroundColor: COLOR,
+        padding: "10px 50px 10px 20px",
+      }}
+    >
+      <CardContent sx={{ paddingRight: paddingSides, paddingLeft: paddingSides }}>
+        <Typography sx={{ textAlign: "left" }} variant="body" color="text.primary">
+          {comment.content}
+        </Typography>
+      </CardContent>
+
+      <Grid2 container spacing={1}>
+        <Grid2 size={2}>
+          {isUser ? (
+            <>
+              <Tooltip title="Eliminar comentario">
+                <IconButton aria-label="delete" onClick={deleteCommentHandler}>
+                  <DeleteIcon />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Editar comentario" onClick={switchToEditMode}>
+                <IconButton aria-label="edit">
+                  <EditIcon />
+                </IconButton>
+              </Tooltip>
+            </>
+          ) : null}
+        </Grid2>
+        <Grid2 size={10} sx={{ alignContent: "center" }}>
+          <Typography sx={{ textAlign: "right" }} variant="body2" color="text.secondary">
+            {`@${comment.username} ${timeCreated}${isEdited}`}
+          </Typography>
+        </Grid2>
+      </Grid2>
+    </Card>
+  );
+
+  const CommentEditMode = (
+    <EditComment
+      userState={userState}
+      comment={comment}
+      refresh={() => {
+        setEditMode(false);
+        refresh();
+      }}
+    />
+  );
 
   return (
     <>
@@ -61,45 +117,7 @@ const Comment = ({ userState, comment, setPost }) => {
           }}
         />
       ) : null}
-      <Card
-        sx={{
-          maxWidth: "70rem",
-          minWidth: "15rem",
-          margin: "0.25rem auto",
-          backgroundColor: COLOR,
-          padding: "10px 50px 10px 20px",
-        }}
-      >
-        <CardContent sx={{ paddingRight: paddingSides, paddingLeft: paddingSides }}>
-          <Typography sx={{ textAlign: "left" }} variant="body" color="text.primary">
-            {comment.content}
-          </Typography>
-        </CardContent>
-
-        <Grid2 container spacing={1}>
-          <Grid2 size={2}>
-            {isUser ? (
-              <>
-                <Tooltip title="Eliminar comentario">
-                  <IconButton aria-label="delete" onClick={deleteCommentHandler}>
-                    <DeleteIcon />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title="Editar comentario" onClick={editCommentHandler}>
-                  <IconButton aria-label="edit">
-                    <EditIcon />
-                  </IconButton>
-                </Tooltip>
-              </>
-            ) : null}
-          </Grid2>
-          <Grid2 size={10} sx={{ alignContent: "center" }}>
-            <Typography sx={{ textAlign: "right" }} variant="body2" color="text.secondary">
-              {`@${comment.username} ${timeCreated}${isEdited}`}
-            </Typography>
-          </Grid2>
-        </Grid2>
-      </Card>
+      {editMode ? CommentEditMode : CommentReadMode}
     </>
   );
 };

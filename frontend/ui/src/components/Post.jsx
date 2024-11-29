@@ -40,7 +40,7 @@ const Post = ({ userState }) => {
         {createComment ? (
           <Collapse>
             <ListItem>
-              <CreateComment userState={userState} postId={post.id} func={fetchPost} />
+              <CreateComment userState={userState} postId={post.id} refresh={fetchPost} />
             </ListItem>
           </Collapse>
         ) : null}
@@ -152,9 +152,9 @@ const Post = ({ userState }) => {
           {createCommentComponentTransitioned}
 
           {post.comments
-            .sort((a, b) => new Date(a.creation_date) - new Date(b.creation_date))
+            .sort((a, b) => new Date(b.creation_date) - new Date(a.creation_date))
             .map((comment, i) => {
-              return <Comment key={i} userState={userState} comment={comment} setPost={setPost} />;
+              return <Comment key={i} userState={userState} comment={comment} setPost={setPost} postId={post.id} refresh={fetchPost} />;
             })}
         </Box>
       ) : null}
