@@ -67,12 +67,35 @@ async function getPostById(postId) {
 async function createPost(title, content, username) {
   console.log("Creating post");
   const posrUrl = `${BACKEND_URL}/post`;
-  const postRes = await axios.post(posrUrl, {title: title, content: content, username: username});
+  const postRes = await axios.post(posrUrl, { title: title, content: content, username: username });
   const res = postRes.data;
-  console.log(res)
+  console.log(res);
   return res == "OK";
-} 
+}
+
+async function deletePost(post_id, username) {
+  console.log("Deleting post");
+  const usernameEncoded = encodeURIComponent(username);
+  const postIdEncoded = encodeURIComponent(post_id);
+  const postUrl = `${BACKEND_URL}/post?username=${usernameEncoded}&post_id=${postIdEncoded}`;
+  const postRes = await axios.delete(postUrl);
+
+  const res = postRes.data;
+  console.log(res);
+  return res == "OK";
+}
+
+async function updatePost(postId, title, content, username) {
+  console.log("Updating post");
+  const posrUrl = `${BACKEND_URL}/post`;
+  const postRes = await axios.put(posrUrl, { post_id: postId, title: title, content: content, username: username });
+  const res = postRes.data;
+  console.log(res);
+  return res == "OK";
+}
 
 export { getPosts };
 export { getPostById };
 export { createPost };
+export { deletePost };
+export { updatePost };

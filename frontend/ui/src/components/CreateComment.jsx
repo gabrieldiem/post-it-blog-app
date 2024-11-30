@@ -12,7 +12,7 @@ const paddingSides = "30px";
 
 const MAX_CONTENT = 2000;
 
-const CreateComment = ({userState, postId, refresh }) => {
+const CreateComment = ({ userState, postId, refresh }) => {
   const [contentError, setContentError] = useState(false);
   const [contentErrorMessage, setContentErrorMessage] = useState("");
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const CreateComment = ({userState, postId, refresh }) => {
   const performCommentCreation = async (content) => {
     try {
       const resOk = await createComment(content, postId, userState.user.id);
-      console.log(resOk)
+      console.log(resOk);
       if (resOk) {
         refresh();
       } else {
@@ -40,7 +40,7 @@ const CreateComment = ({userState, postId, refresh }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (contentError || !userState || !(userState.user) ) {
+    if (contentError || !userState || !userState.user) {
       return;
     }
 
@@ -120,17 +120,16 @@ const CreateComment = ({userState, postId, refresh }) => {
             color={contentError ? "error" : "primary"}
           />
         </FormControl>
-
-          <Button
-            type="submit"
-            sx={{
-              width: "40%",
-            }}
-            variant="contained"
-            onClick={validateInputs}
-          >
-            Crear comentario
-          </Button>
+        <Button
+          type="submit"
+          sx={{
+            width: "40%",
+          }}
+          variant="contained"
+          onClick={validateInputs}
+        >
+          Crear comentario
+        </Button>
       </Box>
     </Card>
   );

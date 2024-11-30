@@ -55,7 +55,6 @@ function Home({ userState }) {
 
   return (
     <>
-      {routTestingButtons}
       {errorDialog ? (
         <GenericDialog
           text={errorMessage}

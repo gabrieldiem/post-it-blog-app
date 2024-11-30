@@ -10,7 +10,7 @@ import { CLIENT_URLS } from "../services/globals.js";
 const COLOR = "#282828";
 const VIOLET_PRIMARY = "#a757e4";
 const MAX_TITLE = 30;
-const MAX_CONTENT = 30;
+const MAX_CONTENT = 2000;
 const paddingSides = "30px";
 
 const CreatePost = ({ userState }) => {
