@@ -321,6 +321,58 @@ async function updateComment(content, userId, commentId, db) {
   await db.runP("END TRANSACTION");
 }
 
+async function deletePost(post_id, db) {
+  const postId = Number(post_id).toString();
+  if (postId == null || postId < 0) {
+    throw Error("Invalid post id");
+  }
+
+  await db.runP("BEGIN TRANSACTION");
+
+  const statement = db.prepare(`
+    DELETE FROM post
+    WHERE id = ${postId};
+  `);
+
+  statement.runP = promisify(statement.run);
+  statement.finalizeP = promisify(statement.finalize);
+  await statement.runP();
+  await statement.finalizeP();
+  await db.runP("END TRANSACTION");
+}
+
+async function updatePost(postId, title, content, db) {
+  if (title.length > MAX_POST_TITLE) {
+    throw Error("Title too long");
+  }
+
+  if (content.length > MAX_CONTENT) {
+    throw Error("Content too long");
+  }
+
+  if(postId < 0){
+    throw Error("Invalid post id");
+  }
+
+  const currentTimeEpochMs = Date.now();
+
+  await db.runP("BEGIN TRANSACTION");
+
+  const statement = db.prepare(`
+    UPDATE post
+    SET title = ?, content = ?, last_change_date = ?
+    WHERE id = ?;
+  `);
+
+  statement.runP = promisify(statement.run);
+  statement.finalizeP = promisify(statement.finalize);
+
+  await statement.runP(title, content, currentTimeEpochMs, postId);
+  await statement.finalizeP();
+  await db.runP("END TRANSACTION");
+}
+
+
 export { getDb };
 export { getPosts };
 export { getUserInfo };
@@ -334,3 +386,5 @@ export { getCommentInfo };
 export { createNewComment };
 export { getUserInfoById };
 export { updateComment };
+export { deletePost };
+export { updatePost };
