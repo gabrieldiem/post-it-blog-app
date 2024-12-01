@@ -14,7 +14,7 @@ SCRIPT_DIR_BACKEND="$(dirname "$0")"
 print_colored_message $YELLOW_BOLD "══ Starting Project: Backend and Frontend ══"
 
 print_colored_message $YELLOW_BOLD "══ Building Frontend ══"
-npm --prefix "$SCRIPT_DIR_BACKEND"/../frontend/ui run build
+npm --prefix "$SCRIPT_DIR_BACKEND"/../frontend/ui run build_dev
 
 # Start both commands in a subshell, so they belong to the same process group
 print_colored_message $YELLOW_BOLD "══ Starting servers ══"
