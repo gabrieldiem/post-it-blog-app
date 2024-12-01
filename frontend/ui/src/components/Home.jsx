@@ -30,29 +30,6 @@ function Home({ userState }) {
     return null;
   }
 
-  const routTestingButtons = (
-    <>
-      <br />
-      {"     "}
-      <Button onClick={() => navigate(CLIENT_URLS.HOME)} variant="contained">
-        Home
-      </Button>{" "}
-      {"  "}
-      <Button onClick={() => navigate(CLIENT_URLS.LOGIN)} variant="contained">
-        Login
-      </Button>{" "}
-      {"  "}
-      <Button onClick={() => navigate(CLIENT_URLS.SIGNUP)} variant="contained">
-        Signup
-      </Button>
-      {"  "}
-      <Button onClick={() => navigate(CLIENT_URLS.ACCOUNT)} variant="contained">
-        Account
-      </Button>
-      {"  "}
-    </>
-  );
-
   return (
     <>
       {errorDialog ? (

@@ -64,10 +64,30 @@ async function getPostById(postId) {
   return parsePost(postFetched);
 }
 
-async function createPost(title, content, username) {
+async function createPost(title, content, username, file) {
   console.log("Creating post");
-  const posrUrl = `${BACKEND_URL}/post`;
-  const postRes = await axios.post(posrUrl, { title: title, content: content, username: username });
+  const postUrl = `${BACKEND_URL}/post`;
+
+  let _file = null;
+
+  if (file && file[0]) {
+    _file = file[0];
+  } else if (file) {
+    _file = file;
+  }
+
+  const formData = new FormData();
+  formData.append("title", title);
+  formData.append("content", content);
+  formData.append("username", username);
+  formData.append("image", _file);
+
+  const postRes = await axios.post(postUrl, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+
   const res = postRes.data;
   console.log(res);
   return res == "OK";
@@ -85,13 +105,39 @@ async function deletePost(post_id, username) {
   return res == "OK";
 }
 
-async function updatePost(postId, title, content, username) {
-  console.log("Updating post");
-  const posrUrl = `${BACKEND_URL}/post`;
-  const postRes = await axios.put(posrUrl, { post_id: postId, title: title, content: content, username: username });
+async function updatePost(postId, title, content, username, file) {
+  console.log("Creating post");
+  const postUrl = `${BACKEND_URL}/post`;
+
+  let _file = null;
+
+  if (file && file[0]) {
+    _file = file[0];
+  } else if (file) {
+    _file = file;
+  }
+
+  const formData = new FormData();
+  formData.append("post_id", postId);
+  formData.append("title", title);
+  formData.append("content", content);
+  formData.append("username", username);
+  formData.append("image", _file);
+
+  const postRes = await axios.put(postUrl, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+
   const res = postRes.data;
   console.log(res);
   return res == "OK";
+}
+
+function getImageSrcUrl(post_attachment) {
+  const imageIdEncoded = encodeURIComponent(post_attachment);
+  return `${BACKEND_URL}/img?id=${imageIdEncoded}`;
 }
 
 export { getPosts };
@@ -99,3 +145,4 @@ export { getPostById };
 export { createPost };
 export { deletePost };
 export { updatePost };
+export { getImageSrcUrl };

@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardContent, Typography, Box, IconButton, Tooltip, List, Collapse, ListItem, Button, ListItemText, Avatar, Grid2, FormControl, FormLabel, TextField } from "@mui/material";
+import { Card, CardHeader, CardContent, Typography, Box, IconButton, Tooltip, List, Collapse, ListItem, Button, CardMedia, ListItemText, Avatar, Grid2, FormControl, FormLabel, TextField } from "@mui/material";
 
 import { Grid2 as Grid } from "@mui/material";
 import { TransitionGroup } from "react-transition-group";
@@ -10,13 +10,12 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { StatusCodes } from "http-status-codes";
 
-
-import { deletePost, getPostById, updatePost } from "../services/posts";
+import { deletePost, getPostById, updatePost, getImageSrcUrl } from "../services/posts";
 import PostPreview from "./PostPreview";
 import { timeAgoFormatter } from "../services/globals.js";
 import { CLIENT_URLS } from "../services/globals";
 import GenericDialog from "./GenericDialog";
-
+import DragDrop from "./CreatePostFileUploader.jsx";
 import Comment from "./Comment.jsx";
 
 import "./select.css";
@@ -35,6 +34,7 @@ const Post = ({ userState }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isUser, setIsUser] = useState(false);
   const [editMode, setEditMode] = useState(false);
+  const [file, setFile] = useState(null);
   const navigate = useNavigate();
 
   const [showDeleteDialogSucess, setShowDeleteDialogSucess] = useState(false);
@@ -80,10 +80,6 @@ const Post = ({ userState }) => {
     </List>
   );
 
-  const parseAvatarName = (username) => {
-    return username.length >= 2 ? username.slice(0, 2) : username;
-  };
-
   async function fetchPost() {
     try {
       const post = await getPostById(post_id);
@@ -99,7 +95,7 @@ const Post = ({ userState }) => {
         youString: userState.user != null && userState.user == post.username ? YOU_STRING : "",
       });
     } catch (error) {
-      console.log(error)
+      console.log(error);
       setErrorMessage("Error al cargar el post");
       setErrorDialog(true);
     }
@@ -116,7 +112,6 @@ const Post = ({ userState }) => {
     }
   }, [userState, post]);
 
-
   const [titleError, setTitleError] = useState(false);
   const [titleErrorMessage, setTitleErrorMessage] = useState("");
 
@@ -125,7 +120,7 @@ const Post = ({ userState }) => {
 
   const performPostUpdate = async (title, content) => {
     try {
-      const res = await updatePost(post ? post.id : null, title, content, userState.user.name);
+      const res = await updatePost(post ? post.id : null, title, content, userState.user.name, file);
       if (res) {
         setEditMode(false);
         fetchPost();
@@ -270,6 +265,10 @@ const Post = ({ userState }) => {
                 defaultValue={post.content}
               />
             </FormControl>
+            <FormControl>
+              <FormLabel htmlFor="post_img">Subir nueva imagen para el post</FormLabel>
+              <DragDrop setFile={setFile} formName="post_img" />
+            </FormControl>
             <Box
               sx={{
                 display: "flex",
@@ -314,6 +313,8 @@ const Post = ({ userState }) => {
 
             <br />
             <br />
+
+            {post.attachment && post.attachment != undefined && post.attachment != "undefined"  && post.attachment != "NULL" ? <CardMedia sx={{ padding: "1em 1em 0 1em", objectFit: "contain", maxHeight: "500px" }} component="img" image={getImageSrcUrl(post.attachment)} /> : null}
 
             <Grid2 container spacing={1}>
               <Grid2 size={2}>

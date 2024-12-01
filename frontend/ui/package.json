@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "lint": "eslint .",
+    "build_dev": "vite build --mode development",
     "build": "vite build --mode production",
     "dev": "vite",
     "preview": "vite preview",
@@ -22,6 +23,7 @@
     "javascript-time-ago": "^2.5.11",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-drag-drop-files": "^2.3.10",
     "react-router-dom": "^6.28.0",
     "react-transition-group": "^4.4.5",
     "styled-components": "^6.1.13"

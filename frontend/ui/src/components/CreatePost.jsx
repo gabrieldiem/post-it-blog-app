@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { createPost } from "../services/posts.js";
 import GenericDialog from "./GenericDialog.jsx";
 import { CLIENT_URLS } from "../services/globals.js";
+import DragDrop from "./CreatePostFileUploader.jsx";
 
 const COLOR = "#282828";
 const VIOLET_PRIMARY = "#a757e4";
@@ -21,11 +22,12 @@ const CreatePost = ({ userState }) => {
   const [contentErrorMessage, setContentErrorMessage] = useState("");
 
   const [showDialog, setShowDialog] = useState(false);
+  const [file, setFile] = useState(null);
   const navigate = useNavigate();
 
   const performPostCreation = async (title, content) => {
     try {
-      const res = await createPost(title, content, userState.user.name);
+      const res = await createPost(title, content, userState.user.name, file);
       if (res) {
         setShowDialog(true);
       } else {
@@ -188,6 +190,10 @@ const CreatePost = ({ userState }) => {
                 minRows="6"
                 color={contentError ? "error" : "primary"}
               />
+            </FormControl>
+            <FormControl>
+              <FormLabel htmlFor="post_img">Imagen opcional para el post</FormLabel>
+              <DragDrop setFile={setFile} formName="post_img" />
             </FormControl>
             <Box
               sx={{
