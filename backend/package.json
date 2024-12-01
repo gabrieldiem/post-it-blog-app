@@ -4,6 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "upload_images_raw_once": "node ./db/script_img_standalone.js",
     "dev": "nodemon --env-file=./.env index.js",
     "start": "node --env-file=./.env index.js"
   },
@@ -15,6 +16,8 @@
     "csvtojson": "^2.0.10",
     "express": "^4.21.1",
     "http-status-codes": "^2.3.0",
+    "mongoose": "^8.8.3",
+    "multer": "^1.4.5-lts.1",
     "pino": "^9.5.0",
     "pino-pretty": "^13.0.0",
     "sqlite3": "^5.1.7"

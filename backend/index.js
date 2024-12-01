@@ -12,6 +12,7 @@ import rootRouter from "./src/routers/rootRouter.js";
 import userRouter from "./src/routers/userRouter.js";
 import postRouter from "./src/routers/postRouter.js";
 import commentRouter from "./src/routers/commentRouter.js";
+import imageRouter from "./src/routers/imageRouter.js";
 
 const PORT = process.env.BLOG_APP_BACKEND_PORT;
 
@@ -23,6 +24,7 @@ app.use(rootRouter);
 app.use(userRouter);
 app.use(postRouter);
 app.use(commentRouter);
+app.use(imageRouter);
 
 const server = app.listen(PORT, () => {
   logger.info(`Backend server running on port ${PORT}, http://localhost:${PORT}`);

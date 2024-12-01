@@ -1,4 +1,5 @@
 import { promisify } from "util";
+import mongoose from "mongoose";
 import { MAX_USERNAME, MAX_POST_TITLE, MAX_CONTENT } from "./constants.js";
 import { logger } from "./logger.js";
 import initDB from "./init.js";
@@ -9,8 +10,22 @@ if (!db) {
   process.exit(EXIT_FAILURE);
 }
 
+const mongoDb = await connectMongoDB();
+
+async function connectMongoDB() {
+  logger.info("MONGO DB URI: " + process.env.MONGO_DB_URI);
+  const mongoURI = process.env.MONGO_DB_URI;
+  const _mongoDb = await mongoose.connect(mongoURI);
+  logger.info("MongoDB connected");
+  return _mongoDb;
+}
+
 function getDb() {
   return db;
+}
+
+function getMongoDb() {
+  return mongoDb;
 }
 
 async function getCommentsFromPostId(postId, db) {
@@ -42,6 +57,7 @@ async function getPosts(db) {
       post.attachment AS post_attachment,
       post.creation_date AS post_creation_date,
       post.last_change_date AS post_last_change_date,
+      post.attachment AS post_attachment,
       user.id AS user_id,
       user.name AS user_name
     FROM 
@@ -155,6 +171,7 @@ async function getPostInfo(post_id, db) {
       post.attachment AS post_attachment, 
       post.creation_date AS post_creation_date, 
       post.last_change_date AS post_last_change_date, 
+      post.attachment AS post_attachment,
       post.user_id AS post_user_id,
       user.id AS user_id,
       user.name AS user_name
@@ -174,6 +191,18 @@ async function getPostInfo(post_id, db) {
   post.comments = await getCommentsFromPostId(post.post_id, db);
 
   return post;
+}
+
+function insertManualPromisify(db, query) {
+  return new Promise((resolve, reject) => {
+    db.run(query, function (err) {
+      if (err) {
+        reject(err); // Reject the promise if there's an error
+      } else {
+        resolve(this.lastID); // Resolve the promise with `lastID`
+      }
+    });
+  });
 }
 
 async function createPost(title, content, userInfo, db) {
@@ -198,7 +227,40 @@ async function createPost(title, content, userInfo, db) {
   statement.runP = promisify(statement.run);
   statement.finalizeP = promisify(statement.finalize);
 
-  await statement.runP(title, content, null, currentTimeEpochMs, currentTimeEpochMs, userInfo.user_id);
+  //const a =  await statement.runP(title, content, null, currentTimeEpochMs, currentTimeEpochMs, userInfo.user_id);
+
+  const last_idP = new Promise((resolve, reject) => {
+    statement.run(title, content, null, currentTimeEpochMs, currentTimeEpochMs, userInfo.user_id, function (err) {
+      if (err) {
+        reject(err); // Reject the promise if there's an error
+      } else {
+        resolve(this.lastID); // Resolve the promise with `lastID`
+      }
+    });
+  });
+
+  await statement.finalizeP();
+
+  await db.runP("END TRANSACTION");
+
+  return await last_idP;
+}
+
+async function updateAttachmentForPost(postId, image_id, db) {
+  const imageId = String(image_id);
+  console.log(imageId);
+  await db.runP("BEGIN TRANSACTION");
+
+  const statement = db.prepare(`
+    UPDATE post
+    SET attachment = ?
+    WHERE id = ?;
+  `);
+
+  statement.runP = promisify(statement.run);
+  statement.finalizeP = promisify(statement.finalize);
+
+  await statement.runP(imageId, postId);
   await statement.finalizeP();
   await db.runP("END TRANSACTION");
 }
@@ -350,7 +412,7 @@ async function updatePost(postId, title, content, db) {
     throw Error("Content too long");
   }
 
-  if(postId < 0){
+  if (postId < 0) {
     throw Error("Invalid post id");
   }
 
@@ -372,8 +434,8 @@ async function updatePost(postId, title, content, db) {
   await db.runP("END TRANSACTION");
 }
 
-
 export { getDb };
+export { getMongoDb };
 export { getPosts };
 export { getUserInfo };
 export { createNewUser };
@@ -388,3 +450,4 @@ export { getUserInfoById };
 export { updateComment };
 export { deletePost };
 export { updatePost };
+export { updateAttachmentForPost };

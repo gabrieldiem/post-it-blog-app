@@ -25,4 +25,6 @@ dist-ssr
 
 *.sqlite3
 *.jpg
-img.js
+*.avif
+/**/debug.txt
+.env

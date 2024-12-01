@@ -1,8 +1,10 @@
 import express from "express";
 import { logger, logAffected, logErrorMessageToConsole } from "../logger.js";
-import { getPostInfo, createPost, getUserInfo, deletePost, updatePost } from "../db.js";
+import { getPostInfo, createPost, getUserInfo, deletePost, updatePost, updateAttachmentForPost, createNewComment } from "../db.js";
 import { StatusCodes } from "http-status-codes";
 import url from "url";
+import { attachImage, deleteImage } from "../image.js";
+import multer from "multer";
 
 import { getDb } from "../db.js";
 const db = getDb();
@@ -10,6 +12,8 @@ const db = getDb();
 import { getPosts } from "../db.js";
 
 const postRouter = express.Router();
+
+const upload = multer({ storage: multer.memoryStorage() });
 
 postRouter.get("/posts", async (req, res) => {
   try {
@@ -49,17 +53,17 @@ postRouter.get("/post", async (req, res) => {
   }
 });
 
-postRouter.post("/post", async (req, res) => {
+postRouter.post("/post", upload.single("image"), async (req, res) => {
   try {
     logger.info("Requested: POST /post");
 
-    if (!req.body) {
-      throw Error("No body present in post request");
+    let file = null;
+    if (req.file) {
+      file = req.file;
     }
-    console.log(req.body);
-    const username = req.body.username;
-    const title = req.body.title;
-    const content = req.body.content;
+
+    const { title, content, username } = req.body;
+    console.log(req.file);
 
     if (!title || !content || !username || title.length == 0 || content.length == 0 || username.length == 0) {
       throw Error("Invalid params: title, content or username");
@@ -71,7 +75,13 @@ postRouter.post("/post", async (req, res) => {
       return;
     }
 
-    await createPost(title, content, userInfo[0], db);
+    const postId = await createPost(title, content, userInfo[0], db);
+    console.log(postId);
+
+    if (file) {
+      const imageId = await attachImage(file, postId);
+      await updateAttachmentForPost(postId, imageId, db);
+    }
 
     res.send("OK");
   } catch (error) {
@@ -106,6 +116,15 @@ postRouter.delete("/post", async (req, res) => {
       return;
     }
 
+    const postInfo = await getPostInfo(postId, db);
+    if (postInfo.length == 0) {
+      logger.warn("Id does not correspond to an existing post");
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).send("Id does not correspond to an existing post");
+      return;
+    }
+
+    const oldAttachment = postInfo.post_attachment;
+
     await deletePost(postId, db);
 
     const postInfoCheck = await getPostInfo(postId, db);
@@ -116,6 +135,11 @@ postRouter.delete("/post", async (req, res) => {
       return;
     }
 
+    console.log(oldAttachment);
+    if (oldAttachment !== "NULL" && oldAttachment) {
+      await deleteImage(oldAttachment);
+    }
+
     res.send("OK");
   } catch (error) {
     const genericErrorMessage = "Failed deleting post";
@@ -124,18 +148,18 @@ postRouter.delete("/post", async (req, res) => {
   }
 });
 
-postRouter.put("/post", async (req, res) => {
+postRouter.put("/post", upload.single("image"), async (req, res) => {
   try {
-    logger.info("Requested: POST /post");
+    logger.info("Requested: PUT /post");
 
-    if (!req.body) {
-      throw Error("No body present in post request");
+    let file = null;
+    if (req.file) {
+      file = req.file;
     }
-    console.log(req.body);
-    const username = req.body.username;
-    const title = req.body.title;
-    const content = req.body.content;
-    const postId = req.body.post_id;
+
+    const { title, content, username, post_id } = req.body;
+    const postId = post_id;
+    console.log(title, content, username, post_id);
 
     if (!postId || !title || !content || !username || title.length == 0 || content.length == 0 || username.length == 0) {
       throw Error("Invalid params: title, content or username");
@@ -157,6 +181,15 @@ postRouter.put("/post", async (req, res) => {
       logger.warn("User id does not match post owner");
       res.status(StatusCodes.BAD_REQUEST).send("User id does not match post owner");
       return;
+    }
+
+    if (file) {
+      const oldAttachment = postInfo.post_attachment;
+      await deleteImage(oldAttachment);
+      const newImageId = await attachImage(file, postId);
+      await updateAttachmentForPost(postId, newImageId, db);
+    } else {
+      logger.error("nope");
     }
 
     await updatePost(postId, title, content, db);
