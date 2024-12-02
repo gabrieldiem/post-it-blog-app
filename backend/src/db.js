@@ -13,7 +13,6 @@ if (!db) {
 const mongoDb = await connectMongoDB();
 
 async function connectMongoDB() {
-  logger.info("MONGO DB URI: " + process.env.MONGO_DB_URI);
   const mongoURI = process.env.MONGO_DB_URI;
   const _mongoDb = await mongoose.connect(mongoURI);
   logger.info("MongoDB connected");
