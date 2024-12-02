@@ -1,6 +1,8 @@
 import axios from "axios";
 import { BACKEND_URL } from "./globals";
 
+const LOCAL_STORAGE_USER_KEY = "user";
+
 function parseUserInfo(userInfo) {
   return {
     id: userInfo.user_id,
@@ -15,7 +17,7 @@ async function getUserInfo(username) {
   const getUserUrl = `${BACKEND_URL}/user?username=${usernameEncoded}`;
   const userRes = await axios.get(getUserUrl);
 
-  if(userRes.data && userRes.data[0]){
+  if (userRes.data && userRes.data[0]) {
     const userFetched = userRes.data[0];
     console.log(userFetched);
     return parseUserInfo(userFetched);
@@ -30,7 +32,7 @@ async function createNewUser(username) {
   const getUserUrl = `${BACKEND_URL}/user?username=${usernameEncoded}`;
   const userRes = await axios.post(getUserUrl);
 
-  if(userRes.data && userRes.data[0]){
+  if (userRes.data && userRes.data[0]) {
     const userFetched = userRes.data[0];
     console.log(userFetched);
     return parseUserInfo(userFetched);
@@ -39,7 +41,7 @@ async function createNewUser(username) {
   return userRes.data;
 }
 
-function isUserLogged(user){
+function isUserLogged(user) {
   if (!user) {
     return false;
   }
@@ -55,14 +57,14 @@ function isUserLogged(user){
   return true;
 }
 
-async function updateUsername(oldUsername, newUsername){
+async function updateUsername(oldUsername, newUsername) {
   console.log("Updating username");
   const oldUsernameEncoded = encodeURIComponent(oldUsername);
   const newUsernameEncoded = encodeURIComponent(newUsername);
   const getUserUrl = `${BACKEND_URL}/user?old_username=${oldUsernameEncoded}&new_username=${newUsernameEncoded}`;
   const userRes = await axios.put(getUserUrl);
-  
-  if(userRes.data && userRes.data[0]){
+
+  if (userRes.data && userRes.data[0]) {
     const userFetched = userRes.data[0];
     console.log(userFetched);
     return parseUserInfo(userFetched);
@@ -78,12 +80,23 @@ async function deleteUser(username) {
   const userRes = await axios.delete(getUserUrl);
 
   const res = userRes.data;
-  console.log(res)
+  console.log(res);
   return res == "OK";
 }
 
-export {getUserInfo};
-export {createNewUser};
-export {isUserLogged};
-export {updateUsername};
-export {deleteUser};
+function saveUserToLocalStorage(user) {
+  localStorage.setItem(LOCAL_STORAGE_USER_KEY, JSON.stringify(user));
+}
+
+function deleteUserFromLocalStorage() {
+  localStorage.removeItem(LOCAL_STORAGE_USER_KEY);
+}
+
+export { getUserInfo };
+export { createNewUser };
+export { isUserLogged };
+export { updateUsername };
+export { deleteUser };
+export { LOCAL_STORAGE_USER_KEY };
+export { saveUserToLocalStorage };
+export { deleteUserFromLocalStorage };

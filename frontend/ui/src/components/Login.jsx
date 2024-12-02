@@ -9,6 +9,7 @@ import "./select.css";
 
 import { getUserInfo, isUserLogged } from "../services/user";
 import { CLIENT_URLS } from "../services/globals";
+import { saveUserToLocalStorage } from "../services/user";
 
 const VIOLET_PRIMARY = "#a757e4";
 const MAX_USERNAME = 30;
@@ -24,7 +25,9 @@ const Login = ({ userState }) => {
     try {
       const data = await getUserInfo(username);
       if (data && data.name) {
+        console.log(data);
         userState.setUser(data);
+        saveUserToLocalStorage(data);
         console.log(userState);
         navigate(CLIENT_URLS.HOME);
       } else {

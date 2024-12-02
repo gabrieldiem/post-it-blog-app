@@ -9,6 +9,8 @@ import { CLIENT_URLS } from "../services/globals";
 import "./select.css";
 import logo from "../assets/logo.png";
 
+import { deleteUserFromLocalStorage } from "../services/user";
+
 const VIOLET_AVATAR = "#44225e";
 const VIOLET_PRIMARY = "#a757e4";
 const VIOLET_PRIMARY_S = "#cfabeb";
@@ -33,6 +35,7 @@ function Navbar({ userState, children }) {
       link: null,
       func: () => {
         setLogout(true);
+        deleteUserFromLocalStorage();
         console.log("func");
       },
     },
@@ -228,22 +231,6 @@ function Navbar({ userState, children }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [logout]);
 
-  /*useEffect(() => {
-    console.log("log")
-    if (logout || !userState.user) {
-      if(!userState.user){
-        userState.setUser(null);
-      }
-      navigate(CLIENT_URLS.HOME);
-      setAccountMenu(getAccountItems(settingsWithoutUser));
-    } else if(userState.user && !logout){
-      setAccountMenu(getAccountItems(settingsWithUser));
-      setLogout(false);
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userState, userState.user, logout]);*/
-
   const parseAvatarName = (username) => {
     return username.length >= 2 ? username.slice(0, 2) : username;
   };
@@ -253,7 +240,7 @@ function Navbar({ userState, children }) {
       <Box sx={{ flexGrow: 0 }}>
         <Tooltip title="Abrir configuraciones">
           <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-            {userState && userState.user && userState.user.name ? <Avatar sx={{ bgcolor: VIOLET_PRIMARY_S , color: VIOLET_AVATAR }}>{parseAvatarName(userState.user.name)}</Avatar> : <Avatar />}
+            {userState && userState.user && userState.user.name ? <Avatar sx={{ bgcolor: VIOLET_PRIMARY_S, color: VIOLET_AVATAR }}>{parseAvatarName(userState.user.name)}</Avatar> : <Avatar />}
           </IconButton>
         </Tooltip>
         <Menu

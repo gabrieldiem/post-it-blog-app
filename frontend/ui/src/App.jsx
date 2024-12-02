@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import "./App.css";
 
@@ -17,9 +17,13 @@ import CreatePost from "./components/CreatePost.jsx";
 
 import { CLIENT_URLS } from "./services/globals.js";
 
+import { LOCAL_STORAGE_USER_KEY } from "./services/user.js";
+
 const App = () => {
-  const [user, setUser] = useState(null);
+  const storedUser = localStorage.getItem(LOCAL_STORAGE_USER_KEY);
+  const [user, setUser] = useState(storedUser ? JSON.parse(storedUser) : null);
   const userState = { user: user, setUser: setUser };
+
   const _errorElement = (
     <Navbar userState={userState}>
       <PageNotFound404 />
