@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, Icon, Link, Divider } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
-import MenuIcon from "@mui/material/MenuItem";
+import MenuIcon from "@mui/icons-material/Menu";
 import { useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 
@@ -124,7 +124,7 @@ function Navbar({ userState, children }) {
   const pagesSectionMobile = (
     <>
       <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-        <IconButton size="large" aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleOpenNavMenu} color="white">
+        <IconButton size="large" aria-label="Menu" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleOpenNavMenu} color="white">
           <MenuIcon />
         </IconButton>
         <Menu
