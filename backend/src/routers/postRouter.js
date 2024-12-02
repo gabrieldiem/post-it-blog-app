@@ -157,12 +157,12 @@ postRouter.put("/post", upload.single("image"), async (req, res) => {
       file = req.file;
     }
 
-    const { title, content, username, post_id } = req.body;
+    const { title, content, username, post_id, image_delete } = req.body;
     const postId = post_id;
     console.log(title, content, username, post_id);
 
-    if (!postId || !title || !content || !username || title.length == 0 || content.length == 0 || username.length == 0) {
-      throw Error("Invalid params: title, content or username");
+    if (!postId || !title || !content || !username || image_delete === null || image_delete === undefined || title.length == 0 || content.length == 0 || username.length == 0) {
+      throw Error("Invalid params: title, content, username or image_delete");
     }
 
     const userInfo = await getUserInfo(username, db);
@@ -183,13 +183,18 @@ postRouter.put("/post", upload.single("image"), async (req, res) => {
       return;
     }
 
+    const oldAttachmentExists = postInfo.post_attachment !== "NULL" && postInfo.post_attachment !== null;
+
     if (file) {
-      const oldAttachment = postInfo.post_attachment;
-      await deleteImage(oldAttachment);
+      if (oldAttachmentExists) {
+        const oldAttachment = postInfo.post_attachment;
+        await deleteImage(oldAttachment);
+      }
       const newImageId = await attachImage(file, postId);
       await updateAttachmentForPost(postId, newImageId, db);
-    } else {
-      logger.error("nope");
+    } else if (image_delete && oldAttachmentExists) {
+      await deleteImage(postInfo.post_attachment);
+      await updateAttachmentForPost(postId, "NULL", db);
     }
 
     await updatePost(postId, title, content, db);

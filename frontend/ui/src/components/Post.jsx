@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardContent, Typography, Box, IconButton, Tooltip, List, Collapse, ListItem, Button, CardMedia, ListItemText, Avatar, Grid2, FormControl, FormLabel, TextField } from "@mui/material";
+import { Card, CardHeader, CardContent, Typography, Box, IconButton, Tooltip, List, Collapse, ListItem, Button, CardMedia, FormControlLabel, Checkbox, ListItemText, Avatar, Grid2, FormControl, FormLabel, TextField } from "@mui/material";
 
 import { Grid2 as Grid } from "@mui/material";
 import { TransitionGroup } from "react-transition-group";
@@ -35,6 +35,7 @@ const Post = ({ userState }) => {
   const [isUser, setIsUser] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [file, setFile] = useState(null);
+  const [deleteImgChecked, setDeleteImgChecked] = useState(false);
   const navigate = useNavigate();
 
   const [showDeleteDialogSucess, setShowDeleteDialogSucess] = useState(false);
@@ -120,7 +121,7 @@ const Post = ({ userState }) => {
 
   const performPostUpdate = async (title, content) => {
     try {
-      const res = await updatePost(post ? post.id : null, title, content, userState.user.name, file);
+      const res = await updatePost(post ? post.id : null, title, content, userState.user.name, file, deleteImgChecked);
       if (res) {
         setEditMode(false);
         fetchPost();
@@ -265,6 +266,9 @@ const Post = ({ userState }) => {
                 defaultValue={post.content}
               />
             </FormControl>
+
+            <FormControlLabel htmlFor="post_img_checkbox" control={<Checkbox checked={deleteImgChecked} onChange={(event) => setDeleteImgChecked(event.target.checked)} />} label="Eliminar imagen" />
+
             <FormControl>
               <FormLabel htmlFor="post_img">Subir nueva imagen para el post</FormLabel>
               <DragDrop setFile={setFile} formName="post_img" />
@@ -314,7 +318,9 @@ const Post = ({ userState }) => {
             <br />
             <br />
 
-            {post.attachment && post.attachment != undefined && post.attachment != "undefined"  && post.attachment != "NULL" ? <CardMedia sx={{ padding: "1em 1em 0 1em", objectFit: "contain", maxHeight: "500px" }} component="img" image={getImageSrcUrl(post.attachment)} /> : null}
+            {post.attachment && post.attachment != undefined && post.attachment != "undefined" && post.attachment != "NULL" ? (
+              <CardMedia sx={{ padding: "1em 1em 0 1em", objectFit: "contain", maxHeight: "500px" }} component="img" image={getImageSrcUrl(post.attachment)} />
+            ) : null}
 
             <Grid2 container spacing={1}>
               <Grid2 size={2}>

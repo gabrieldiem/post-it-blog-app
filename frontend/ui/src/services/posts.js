@@ -105,8 +105,9 @@ async function deletePost(post_id, username) {
   return res == "OK";
 }
 
-async function updatePost(postId, title, content, username, file) {
-  console.log("Creating post");
+async function updatePost(postId, title, content, username, file, deleteImg) {
+  console.log(deleteImg);
+  console.log("Updating post");
   const postUrl = `${BACKEND_URL}/post`;
 
   let _file = null;
@@ -123,6 +124,7 @@ async function updatePost(postId, title, content, username, file) {
   formData.append("content", content);
   formData.append("username", username);
   formData.append("image", _file);
+  formData.append("image_delete", deleteImg);
 
   const postRes = await axios.put(postUrl, formData, {
     headers: {
