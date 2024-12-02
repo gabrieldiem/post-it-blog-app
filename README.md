@@ -13,7 +13,6 @@ Una webapp para hacer blogs, con uso de base de datos SQL para almacenar los pos
 3. [Cómo hacer setup del repo](#Cómo-hacer-setup-del-repo)
 4. [Deployment a la nube](#Deployment-a-la-nube)
 
-
 #### Integrantes
 
 | Alumno               | Padrón | Email                 |
@@ -96,7 +95,7 @@ docker build -t blog-app-frontend ./frontend
 3. Para correr los containers:
 
 ```shell
-docker run -p 8081:8081 blog-app-backend 
+docker run -p 8081:8081 blog-app-backend
 ```
 
 ```shell
@@ -121,7 +120,17 @@ pip install pre-commit
 
 Se trabaja con un repositorio privado de Docker Hub.
 
-1. Tag images:
+1. Build images:
+
+```shell
+docker build -t blog-app-backend ./backend
+```
+
+```shell
+docker build -t blog-app-frontend ./frontend
+```
+
+2. Tag images:
 
 ```shell
 docker image tag blog-app-backend gabrieldiem/gprivate:blog-app-backend
@@ -131,7 +140,7 @@ docker image tag blog-app-backend gabrieldiem/gprivate:blog-app-backend
 docker image tag blog-app-frontend gabrieldiem/gprivate:blog-app-frontend
 ```
 
-2. Push image:
+3. Push image:
 
 ```shell
 docker image push gabrieldiem/gprivate:blog-app-backend
