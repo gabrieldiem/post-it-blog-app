@@ -19,7 +19,6 @@ Una webapp para hacer blogs, con uso de base de datos SQL para almacenar los pos
 | -------------------- | ------ | --------------------- |
 | Diem, Walter Gabriel | 105618 | wdiem@fi.uba.ar       |
 | Etchegoyen, Pedro    | 107241 | petchegoyen@fi.uba.ar |
-| Maiolo, Alejandro    | 88461  | amaiolo@fi.uba.ar     |
 | Zitelli, Gabriel     | 105671 | gitelli@fi.uba.ar     |
 
 ## Cómo ejecutarlo
